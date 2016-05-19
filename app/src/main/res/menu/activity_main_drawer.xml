@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/cines"
+            android:icon="@mipmap/cine"
+            android:title="@string/cartelera" />
+        <item
+            android:id="@+id/calificacion"
+            android:icon="@mipmap/calificacion"
+            android:title="@string/calificacion" />
+        <item
+            android:id="@+id/armaPlan"
+            android:icon="@mipmap/amigos"
+            android:title="@string/armaPlan" />
+        <item
+            android:id="@+id/mapa"
+            android:icon="@mipmap/map"
+            android:title="@string/mapa" />
+    </group>
+
+    <item android:title="@string/comunicate">
+        <menu>
+            <item
+                android:id="@+id/compartir"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/comparte" />
+            <item
+                android:id="@+id/acercade"
+                android:icon="@mipmap/about"
+                android:title="@string/acercade" />
+        </menu>
+    </item>
+
+</menu>
