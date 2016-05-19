@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.R;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.listener.OnFragmentInteractionListener;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Cinema;
 
 /**
@@ -48,10 +49,11 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
     private static boolean fast = false;
     private static float zoom = (float) 15.5;
     private static DecimalFormat twoDForm = new DecimalFormat("#.##");
+    private static OnFragmentInteractionListener mListener;
 
     private GoogleMap mMap;
     private LocationManager mLocationManager;
-    private Double myLat, myLng;
+    private Double myLat = 6.2676721377548335, myLng = -75.56773066520691;
     private LatLng myLatLng;
     private boolean marcar = true;
 
@@ -62,10 +64,10 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
     private static int idCinema;
 
+
+
     public static MapaCinemasFragment newInstance(int idCinema) {
 
-        //Este id Cinema se utiliza cuando de otro lugar voy a pedir que me abra el mapa enfocando
-        //un cinema especifico
         MapaCinemasFragment.idCinema = idCinema;
         return new MapaCinemasFragment();
     }
@@ -88,20 +90,25 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        mListener = (OnFragmentInteractionListener) getActivity();
         super.onViewCreated(view, savedInstanceState);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.e("Prueba: ", "Mapa Ready");
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
         cargarPosition();
     }
+
 
     @Override
     public void onLocationChanged(Location location) {
@@ -115,20 +122,22 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
+        Log.e("Provider change: ", provider);
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
+        Log.e("Provider Enabled: ", provider);
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
+        Log.e("Provider Disabled: ", provider);
     }
+
 
     private void cargarCinemas() {
         Log.e("Prueba: ", "Cargar Cinemas");
@@ -140,13 +149,13 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
         listaCinemas.add(c);
         c = new Cinema();
         c.setNombre("Procinal Puerta del norte");
-        c.setLatitud((double) 3);
-        c.setLongitud((double) -74);
+        c.setLatitud((double) 6.339409599999999);
+        c.setLongitud((double) -75.54321419999997);
         listaCinemas.add(c);
         c = new Cinema();
-        c.setNombre("Procinal Santa fe");
-        c.setLatitud((double) 23);
-        c.setLongitud((double) 345346546);
+        c.setNombre("Procinal Florida");
+        c.setLatitud((double) 6.270901899999999);
+        c.setLongitud((double) -75.57674639999999);
         listaCinemas.add(c);
         c = new Cinema();
         c.setNombre("Royal Films Bosque Plaza");
@@ -155,7 +164,6 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
         listaCinemas.add(c);
         cinemaList = listaCinemas;
         marcarCinemas();
-
     }
 
 
@@ -184,7 +192,6 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
         for (int i = 0; i < cinemaList.size(); i++) {
             cine = cinemaList.get(i);
             LatLngCine = new LatLng(cine.getLatitud(), cine.getLongitud());
-
             d = distancia(myLat, myLng, cinemaList.get(i).getLatitud(), cinemaList.get(i).getLongitud());
             if (menorDistancia > d) {
                 menorDistancia = d;
@@ -203,9 +210,26 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
         }
+
+        if (selected == null) {
+            if (menorDistancia < 1) {
+                menorDistancia = menorDistancia * 1000;
+                unidad = " m";
+            } else {
+                unidad = " km";
+            }
+            /*nombre.setText(cineCercano.getNombre());
+            distancia.setText(" (" + twoDForm.format(menorDistancia) + unidad + ")");
+            descipcion.setText(cineCercano.getDescripcion());
+            cardView.setVisibility(View.VISIBLE);
+            selected = cineCercano;*/
+        }
+        //distancia.setSelected(true);
+
     }
 
     private void cargarPosition() {
+        Log.e("Prueba: ", "Cargar Position");
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -244,6 +268,12 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+
+    @Override
     public boolean onMarkerClick(Marker marker) {
         int i = Integer.parseInt(marker.getId().substring(1));
         selected = cinemaList.get(i);
@@ -271,16 +301,16 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
                                 marcar = true;
                                 Intent callGPSSettingIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 startActivity(callGPSSettingIntent);
-                                //mListener.setFragment(RecetasSugeridasFragment.ID, null, false);
                             }
                         })
                 .setNegativeButton("CANCELAR",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //mListener.setFragment(RecetasSugeridasFragment.ID, null, false);
+
                             }
                         });
+
 
         builder.create();
         builder.show();

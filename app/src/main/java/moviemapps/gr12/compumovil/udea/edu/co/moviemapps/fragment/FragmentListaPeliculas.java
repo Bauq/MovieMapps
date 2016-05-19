@@ -37,7 +37,7 @@ public class FragmentListaPeliculas extends Fragment implements OnItemMovieListe
     public static final int ID = 1;
 
     private RecyclerView recyclerView;
-    private String peliculasApiKey = getResources().getString(R.string.api_key);
+    private String peliculasApiKey;
     private LinearLayoutManager mLayoutManager;
     private OnFragmentInteractionListener mListener;
     private List<Movie> movies;
@@ -61,7 +61,7 @@ public class FragmentListaPeliculas extends Fragment implements OnItemMovieListe
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-
+        peliculasApiKey = getResources().getString(R.string.api_key);
         mLayoutManager = new LinearLayoutManager(getContext());
 
         recyclerView.setLayoutManager(mLayoutManager);
