@@ -5,6 +5,7 @@ package moviemapps.gr12.compumovil.udea.edu.co.moviemapps;
  */
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import java.util.ArrayList;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.listener.OnItemMovieListener;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
+
+import static moviemapps.gr12.compumovil.udea.edu.co.moviemapps.R.*;
 
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -36,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                                          int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.adapter_pelicula, parent, false);
+                .inflate(layout.adapter_pelicula, parent, false);
         return new ViewHolder(v);
     }
 
@@ -45,13 +48,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         if(movies.get(position) != null) {
+            if (movies.get(position).getPosterPath() != null) {
+                downlad(holder, movies.get(position).getPosterPath());
+            }
+
             holder.tvNombre.setText(movies.get(position).getTitle());
             holder.tvDuracion.setText(String.valueOf(movies.get(position).getReleaseDate()));
             holder.tvGenero.setText(String.valueOf(movies.get(position).getId()));
-            if (movies.get(position).getPosterPath() != null) {
-                downlad(holder.ivPoster, movies.get(position).getPosterPath());
-            }
-
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,20 +73,20 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombre, tvDuracion,tvGenero;
-        static ImageView ivPoster;
+        ImageView ivPoster;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivPoster = (ImageView) itemView.findViewById(R.id.iv_poster);
-            tvNombre = (TextView) itemView.findViewById(R.id.tv_nombre_pelicula);
-            tvDuracion = (TextView) itemView.findViewById(R.id.tv_duracion);
-            tvGenero= (TextView) itemView.findViewById(R.id.tv_genero);
+            ivPoster = (ImageView) itemView.findViewById(id.iv_poster);
+            tvNombre = (TextView) itemView.findViewById(id.tv_nombre_pelicula);
+            tvDuracion = (TextView) itemView.findViewById(id.tv_duracion);
+            tvGenero= (TextView) itemView.findViewById(id.tv_genero);
 
         }
     }
 
-    private void downlad(final ImageView imageView, String url){
+    private void downlad(final ViewHolder viewHolder, String url){
         AsyncTask<String, Void, Bitmap> asyncTask = new AsyncTask<String, Void, Bitmap>() {
 
 
@@ -112,7 +115,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             @Override
             protected void onPostExecute(Bitmap bitmap) {
                 super.onPostExecute(bitmap);
-                imageView.setImageBitmap(bitmap);
+                viewHolder.ivPoster.setImageBitmap(bitmap);
             }
         };
         asyncTask.execute(url);
