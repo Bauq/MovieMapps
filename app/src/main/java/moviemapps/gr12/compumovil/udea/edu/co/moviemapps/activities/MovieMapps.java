@@ -1,4 +1,4 @@
-package moviemapps.gr12.compumovil.udea.edu.co.moviemapps;
+package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.activities;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,14 +1,9 @@
 package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.persistence;
 
-import android.content.Context;
-import android.test.mock.MockContext;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.SQLDataException;
-
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.MainActivity;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.activities.MainActivity;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.MovieDataManager;
 

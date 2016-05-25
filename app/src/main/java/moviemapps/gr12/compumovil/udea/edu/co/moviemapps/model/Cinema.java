@@ -5,17 +5,9 @@ package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model;
  */
 public class Cinema {
 
-    int idCinema;
-    String nombre, ubicacion, descripcion;
+    String nombre;
     Double latitud, longitud;
 
-    public int getIdCinema() {
-        return idCinema;
-    }
-
-    public void setIdCinema(int idCinema) {
-        this.idCinema = idCinema;
-    }
 
     public String getNombre() {
         return nombre;
@@ -23,22 +15,6 @@ public class Cinema {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public Double getLatitud() {

@@ -1,4 +1,4 @@
-package moviemapps.gr12.compumovil.udea.edu.co.moviemapps;
+package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.R;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.fragment.FragmentListaPeliculas;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.fragment.FragmentLogin;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.fragment.MapaCinemasFragment;
@@ -51,8 +52,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        setFragment(FragmentLogin.ID, null, true);
+        setFragment(FragmentListaPeliculas.ID, null, true);
     }
 
     @Override
@@ -117,11 +117,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFragmentInteraction(Bundle parametros, int accion) {
-
-    }
-
-    @Override
     public void setFragment(int fragmentId, Bundle parametros, boolean addStack) {
         Fragment f = null;
         switch (fragmentId) {
@@ -129,14 +124,14 @@ public class MainActivity extends AppCompatActivity
                 f = FragmentListaPeliculas.newInstance();
                 break;
             case MovieFragment.ID:
-                parametros.getString(MovieFragment.ARG_PARAM1);
-                f = MovieFragment.newInstance(parametros.getString(MovieFragment.ARG_PARAM1));
+                parametros.getString(MovieFragment.ARG_ID_PELICULA);
+                f = MovieFragment.newInstance(parametros.getString(MovieFragment.ARG_ID_PELICULA));
                 break;
             case FragmentLogin.ID:
                 f = FragmentLogin.newInstance();
                 break;
             case MapaCinemasFragment.ID:
-                f= MapaCinemasFragment.newInstance(0);
+                f= MapaCinemasFragment.newInstance();
                 break;
         }
 
@@ -144,10 +139,5 @@ public class MainActivity extends AppCompatActivity
         ft.replace(R.id.content_main, f, f.getClass().getName()).addToBackStack(f.getClass().getName());
         ft.commit();
     }
-
-    public Context getContext(){
-        return getApplicationContext();
-    }
-
 
 }

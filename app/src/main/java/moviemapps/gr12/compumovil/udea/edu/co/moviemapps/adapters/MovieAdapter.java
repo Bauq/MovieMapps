@@ -1,11 +1,11 @@
-package moviemapps.gr12.compumovil.udea.edu.co.moviemapps;
+package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.adapters;
 
 /**
  * Created by Carolina on 11/04/2016.
  */
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,13 +24,13 @@ import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
 import static moviemapps.gr12.compumovil.udea.edu.co.moviemapps.R.*;
 
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private ArrayList<Movie> movies;
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
+    private ArrayList<Movie> listMovies;
     private OnItemMovieListener listener;
 
 
-    public MyAdapter(ArrayList<Movie> myDataset, OnItemMovieListener listener) {
-        movies = myDataset;
+    public MovieAdapter(ArrayList<Movie> movies, OnItemMovieListener listener) {
+        listMovies = movies;
         this.listener = listener;
     }
 
@@ -44,23 +44,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     }
 
 
-
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if(movies.get(position) != null) {
-            if (movies.get(position).getPosterPath() != null) {
-                downlad(holder, movies.get(position).getPosterPath());
+        if (listMovies.get(position) != null) {
+            if (listMovies.get(position).getPosterPath() != null) {
+                downloadImage(holder, listMovies.get(position).getPosterPath());
             }
+            holder.nombrePelicula.setText(listMovies.get(position).getTitle());
+            holder.duracionPelicula.setText(String.valueOf(listMovies.get(position).getReleaseDate()));
 
-            holder.tvNombre.setText(movies.get(position).getTitle());
-            holder.tvDuracion.setText(String.valueOf(movies.get(position).getReleaseDate()));
-            holder.tvGenero.setText(String.valueOf(movies.get(position).getId()));
+            holder.nombrePelicula.setSelected(true);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listener != null){
-                    listener.onItemClick(movies.get(position), holder.itemView, position);
+                if (listener != null) {
+                    listener.onItemClick(listMovies.get(position), holder.itemView, position);
                 }
             }
         });
@@ -68,32 +67,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return movies.size();
+        return listMovies.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNombre, tvDuracion,tvGenero;
-        ImageView ivPoster;
-
+        TextView nombrePelicula, duracionPelicula;
+        ImageView posterPelicula;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivPoster = (ImageView) itemView.findViewById(id.iv_poster);
-            tvNombre = (TextView) itemView.findViewById(id.tv_nombre_pelicula);
-            tvDuracion = (TextView) itemView.findViewById(id.tv_duracion);
-            tvGenero= (TextView) itemView.findViewById(id.tv_genero);
+            posterPelicula = (ImageView) itemView.findViewById(id.iv_poster);
+            nombrePelicula = (TextView) itemView.findViewById(id.tv_nombre_pelicula);
+            duracionPelicula = (TextView) itemView.findViewById(id.tv_duracion);
 
         }
     }
 
-    private void downlad(final ViewHolder viewHolder, String url){
+    private void downloadImage(final ViewHolder viewHolder, String urlImagen) {
         AsyncTask<String, Void, Bitmap> asyncTask = new AsyncTask<String, Void, Bitmap>() {
-
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
 
             @Override
             protected Bitmap doInBackground(String... params) {
@@ -108,18 +99,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 return imagen;
             }
 
             @Override
             protected void onPostExecute(Bitmap bitmap) {
                 super.onPostExecute(bitmap);
-                viewHolder.ivPoster.setImageBitmap(bitmap);
+                viewHolder.posterPelicula.setImageBitmap(bitmap);
             }
         };
-        asyncTask.execute(url);
+        asyncTask.execute(urlImagen);
     }
-
 
 }

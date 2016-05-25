@@ -39,7 +39,7 @@ import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Cinema;
 /**
  * Created by Brian on 05/05/2016.
  */
-public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback, LocationListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnMyLocationButtonClickListener {
+public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback, LocationListener, GoogleMap.OnMyLocationButtonClickListener {
 
     public static final int ID = 8;
 
@@ -62,13 +62,7 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
     Cinema cineCercano, selected;
     double menorDistancia = Double.MAX_VALUE;
 
-    private static int idCinema;
-
-
-
-    public static MapaCinemasFragment newInstance(int idCinema) {
-
-        MapaCinemasFragment.idCinema = idCinema;
+    public static MapaCinemasFragment newInstance() {
         return new MapaCinemasFragment();
     }
 
@@ -90,9 +84,8 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
-        mListener = (OnFragmentInteractionListener) getActivity();
         super.onViewCreated(view, savedInstanceState);
+        mListener = (OnFragmentInteractionListener) getActivity();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -101,10 +94,8 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.e("Prueba: ", "Mapa Ready");
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
-        mMap.setOnMarkerClickListener(this);
         mMap.setOnMyLocationButtonClickListener(this);
         cargarPosition();
     }
@@ -122,20 +113,19 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.e("Provider change: ", provider);
+        Log.i("Provider Change: ", provider);
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-        Log.e("Provider Enabled: ", provider);
+        Log.i("Provider Enabled: ", provider);
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        Log.e("Provider Disabled: ", provider);
+        Log.i("Provider Disabled: ", provider);
     }
 
 
@@ -168,10 +158,10 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
 
     private static double distancia(double lat1, double lng1, double lat2, double lng2) {
-
         double earthRadius = 6371; //kilometers
         double dLat = Math.toRadians(lat2 - lat1);
         double dLng = Math.toRadians(lng2 - lng1);
+
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                 Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
                         Math.sin(dLng / 2) * Math.sin(dLng / 2);
@@ -193,10 +183,6 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
             cine = cinemaList.get(i);
             LatLngCine = new LatLng(cine.getLatitud(), cine.getLongitud());
             d = distancia(myLat, myLng, cinemaList.get(i).getLatitud(), cinemaList.get(i).getLongitud());
-            if (menorDistancia > d) {
-                menorDistancia = d;
-                cineCercano = cinemaList.get(i);
-            }
             if (d < 1) {
                 d = d * 1000;
                 unidad = " m";
@@ -211,25 +197,9 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
         }
 
-        if (selected == null) {
-            if (menorDistancia < 1) {
-                menorDistancia = menorDistancia * 1000;
-                unidad = " m";
-            } else {
-                unidad = " km";
-            }
-            /*nombre.setText(cineCercano.getNombre());
-            distancia.setText(" (" + twoDForm.format(menorDistancia) + unidad + ")");
-            descipcion.setText(cineCercano.getDescripcion());
-            cardView.setVisibility(View.VISIBLE);
-            selected = cineCercano;*/
-        }
-        //distancia.setSelected(true);
-
     }
 
     private void cargarPosition() {
-        Log.e("Prueba: ", "Cargar Position");
         mLocationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
@@ -257,28 +227,14 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
         } else {
             marcar = false;
             if (!mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                createSimpleDialog();
+                createLocationDialog();
                 return;
             }
             mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, fast ? FAST_GPS_UPDATE : SLOW_GPS_UPDATE, MIN_DISTANCE_GPS_UPDATES, this);
         }
         cargarCinemas();
-
-
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        int i = Integer.parseInt(marker.getId().substring(1));
-        selected = cinemaList.get(i);
-        return false;
-    }
 
     @Override
     public boolean onMyLocationButtonClick() {
@@ -289,7 +245,7 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
         return false;
     }
 
-    public void createSimpleDialog() {
+    public void createLocationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         builder.setTitle("¿Usar sistema de localización?")
@@ -310,7 +266,6 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
                             }
                         });
-
 
         builder.create();
         builder.show();

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class MyAdapterTest {
+public class MovieAdapterTest {
 
 	@Test
 	public void testMyAdapter() {

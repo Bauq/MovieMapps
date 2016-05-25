@@ -11,5 +11,4 @@ public interface OnItemMovieListener {
 
     void onItemClick(Movie movie, View view, int position);
 
-    void onItemLongClick(Movie movie, View view, int position);
 }

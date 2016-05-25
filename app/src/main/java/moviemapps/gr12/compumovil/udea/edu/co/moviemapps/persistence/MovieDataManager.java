@@ -5,10 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.List;
-
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.MainActivity;
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.MovieMapps;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.activities.MovieMapps;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.config.DataManager;
 

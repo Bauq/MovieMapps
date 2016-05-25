@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,30 +26,17 @@ import retrofit2.Response;
  * Created by Brian on 05/05/2016.
  */
 public class MovieFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     public static final int ID = 2;
+    public static final String ARG_ID_PELICULA = "idPelicula";
     public String apiKey = "d4aadc42b63f7a1565bffa6dd41f1bfc";
-    public static final String ARG_PARAM1 = "id";
-    public ImageView ivImage;
-    public TextView tvTitle, tvOverview;
-    public Movie movie;
 
+    public ImageView posterPelicula;
+    public TextView tituloPelicula, descripcionPelicula;
+    private String idPelicula;
 
-    // TODO: Rename and change types of parameters
-    private String id;
-
-
-    private OnFragmentInteractionListener mListener;
-
-    public MovieFragment() {
-    }
-
-
-    // TODO: Rename and change types and number of parameters
-    public static MovieFragment newInstance(String param1) {
+    public static MovieFragment newInstance(String idMovie) {
         MovieFragment fragment = new MovieFragment();
-        fragment.id = param1;
+        fragment.idPelicula = idMovie;
         return fragment;
     }
 
@@ -58,7 +44,7 @@ public class MovieFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            id = getArguments().getString(ARG_PARAM1);
+            idPelicula = getArguments().getString(ARG_ID_PELICULA);
         }
     }
 
@@ -69,38 +55,15 @@ public class MovieFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_movie, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ivImage = (ImageView) view.findViewById(R.id.iv_poster_movie);
-        tvOverview = (TextView) view.findViewById(R.id.tv_overview);
-        tvTitle = (TextView) view.findViewById(R.id.tv_title);
+        posterPelicula = (ImageView) view.findViewById(R.id.iv_poster_movie);
+        descripcionPelicula = (TextView) view.findViewById(R.id.tv_overview);
+        tituloPelicula = (TextView) view.findViewById(R.id.tv_title);
         new DownloadMovie().execute();
 
     }
-
 
     private class DownloadMovie extends AsyncTask<Void, Void, Response> {
 
@@ -108,12 +71,11 @@ public class MovieFragment extends Fragment {
         protected Response doInBackground(Void... params) {
             Response response = null;
             final Bitmap imagen;
-            Call<Movie> resultados = MovieMappsService.obtenerInstancia().movieById(id, apiKey);
+            Call<Movie> resultados = MovieMappsService.obtenerInstancia().movieById(idPelicula, apiKey);
             resultados.enqueue(new Callback<Movie>() {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
                     setMovie(response.body());
-
                 }
 
                 @Override
@@ -122,18 +84,15 @@ public class MovieFragment extends Fragment {
                 }
 
             });
-
             return response;
         }
     }
 
-
     public void setMovie(Movie movie) {
         if (movie != null) {
-            tvTitle.setText(movie.getTitle());
-            tvOverview.setText("Overview: \n" + movie.getOverview());
-            downloadImage(ivImage, movie.getPosterPath());
-
+            tituloPelicula.setText(movie.getTitle());
+            descripcionPelicula.setText(movie.getOverview());
+            downloadImage(posterPelicula, movie.getPosterPath());
         }
     }
 
@@ -170,5 +129,4 @@ public class MovieFragment extends Fragment {
         };
         asyncTask.execute(url);
     }
-
 }
