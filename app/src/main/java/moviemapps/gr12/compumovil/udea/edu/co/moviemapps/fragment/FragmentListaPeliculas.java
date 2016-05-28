@@ -6,12 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +18,9 @@ import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.listener.OnItemMovieLis
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.adapters.MovieAdapter;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.R;
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.rest.MovieMappsService;
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.rest.Resultado;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Resultado;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,15 +38,10 @@ public class FragmentListaPeliculas extends Fragment implements OnItemMovieListe
     private String peliculasApiKey;
     private LinearLayoutManager mLayoutManager;
     private OnFragmentInteractionListener mListener;
-    private List<Movie> movies;
+    private List<Pelicula> movies;
 
     public static FragmentListaPeliculas newInstance(){
         return new FragmentListaPeliculas();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Nullable
@@ -72,9 +64,9 @@ public class FragmentListaPeliculas extends Fragment implements OnItemMovieListe
     }
 
     @Override
-    public void onItemClick(Movie movie, View view, int position) {
+    public void onItemClick(Pelicula pelicula, View view, int position) {
             Bundle bundle = new Bundle();
-            bundle.putString(MovieFragment.ARG_ID_PELICULA,String.valueOf(movie.getId()));
+            bundle.putString(MovieFragment.ARG_ID_PELICULA,String.valueOf(pelicula.getId()));
             mListener.setFragment(MovieFragment.ID, bundle,true);
     }
 
@@ -102,15 +94,10 @@ public class FragmentListaPeliculas extends Fragment implements OnItemMovieListe
     public boolean setMovies(Resultado resultado){
         if(resultado != null) {
             movies = resultado.getResults();
-            MovieAdapter adapter = new MovieAdapter((ArrayList<Movie>) movies,this);
+            MovieAdapter adapter = new MovieAdapter((ArrayList<Pelicula>) movies,this);
             recyclerView.setAdapter(adapter);
             return true;
         }
         return false;
-    }
-
-    @Test
-    public void movieValidator() {
-        assertThat(setMovies((Resultado) movies), is(true));
     }
 }

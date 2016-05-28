@@ -19,17 +19,17 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.listener.OnItemMovieListener;
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 
 import static moviemapps.gr12.compumovil.udea.edu.co.moviemapps.R.*;
 
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
-    private ArrayList<Movie> listMovies;
+    private ArrayList<Pelicula> listMovies;
     private OnItemMovieListener listener;
 
 
-    public MovieAdapter(ArrayList<Movie> movies, OnItemMovieListener listener) {
+    public MovieAdapter(ArrayList<Pelicula> movies, OnItemMovieListener listener) {
         listMovies = movies;
         this.listener = listener;
     }

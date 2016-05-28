@@ -1,15 +1,10 @@
-package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps;
+package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.adapter;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class MovieAdapterTest {
-
-	@Test
-	public void testMyAdapter() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void testOnCreateViewHolder() {

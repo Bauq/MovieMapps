@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.activities.MainActivity;
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.MovieDataManager;
 
 import static junit.framework.Assert.assertTrue;
@@ -16,7 +16,7 @@ import static junit.framework.Assert.fail;
 public class testJUnit {
 
     MovieDataManager movieDataManager = null;
-    Movie movie = null;
+    Pelicula pelicula = null;
     String name = "Batman v Superman";
     MainActivity mainActivity;
     int i;
@@ -24,7 +24,7 @@ public class testJUnit {
     public void initValidString() {
         // Specify a valid string.
 
-        movie = new Movie();
+        movie = new Pelicula();
         i = 21312;
     }
     @Test

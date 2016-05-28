@@ -1,19 +1,25 @@
 package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.persistence;
 
+import android.test.mock.MockResources;
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.MovieDataManager;
 
 public class MovieDataManagerTest {
 
 	@Test
 	public void testGetInstance() {
-		fail("Not yet implemented");
+		MovieDataManager movieDataManager = MovieDataManager.getInstance();
+		assertNotNull(movieDataManager);
 	}
 
 	@Test
 	public void testGuardar() {
-		fail("Not yet implemented");
+		MovieDataManager movieDataManager;
+
 	}
 
 	@Test

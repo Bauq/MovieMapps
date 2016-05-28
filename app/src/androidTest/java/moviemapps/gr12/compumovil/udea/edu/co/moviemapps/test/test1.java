@@ -4,7 +4,7 @@ import org.mockito.Mockito;
 
 import java.util.Iterator;
 
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Usuario;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.UsuarioDataManager;
 
@@ -19,7 +19,7 @@ public class test1 {
     @Test
     public void testId()  {
         //  create mock
-        Movie test = Mockito.mock(Movie.class);
+        Pelicula test = Mockito.mock(Pelicula.class);
 
         // define return value for method getUniqueId()
         when(test.getId()).thenReturn(43);
@@ -64,10 +64,10 @@ public class test1 {
     @Test
     public void testReturnValueInDependentOnMethodParameter()  {
         Comparable c= mock(Comparable.class);
-        when(c.compareTo(isA(Movie.class))).thenReturn(0);
+        when(c.compareTo(isA(Pelicula.class))).thenReturn(0);
         //assert
-        Movie todo = new Movie();
-        assertEquals(todo ,c.compareTo(new Movie()));
+        Pelicula todo = new Pelicula();
+        assertEquals(todo ,c.compareTo(new Pelicula()));
     }
 
     @Test

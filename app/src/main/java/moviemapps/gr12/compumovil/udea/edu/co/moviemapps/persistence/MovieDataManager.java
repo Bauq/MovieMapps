@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.activities.MovieMapps;
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.config.DataManager;
 
 /**
@@ -43,48 +43,48 @@ public class MovieDataManager extends DataManager {
     }
 
 
-    private synchronized Movie getMovieFromCursor(Cursor cursor) {
-        Movie movie = new Movie();
-        movie.setId(cursor.getInt(COL_ID));
-        movie.setTitle(cursor.getString(COL_TITLE));
-        movie.setOverview(cursor.getString(COL_OVERVIEW));
-        movie.setPosterPath(cursor.getString(COL_POSTER_PATCH));
-        movie.setReleaseDate(cursor.getString(COL_RELEASEDATE));
-        return movie;
+    private synchronized Pelicula getMovieFromCursor(Cursor cursor) {
+        Pelicula pelicula = new Pelicula();
+        pelicula.setId(cursor.getInt(COL_ID));
+        pelicula.setTitle(cursor.getString(COL_TITLE));
+        pelicula.setOverview(cursor.getString(COL_OVERVIEW));
+        pelicula.setPosterPath(cursor.getString(COL_POSTER_PATCH));
+        pelicula.setReleaseDate(cursor.getString(COL_RELEASEDATE));
+        return pelicula;
     }
 
-    private synchronized ContentValues getContentValues(Movie movie) {
+    private synchronized ContentValues getContentValues(Pelicula pelicula) {
         ContentValues cv = new ContentValues();
-        cv.put(COLUMNS[COL_ID], movie.getId());
-        cv.put(COLUMNS[COL_TITLE], movie.getTitle());
-        cv.put(COLUMNS[COL_OVERVIEW], movie.getOverview());
-        cv.put(COLUMNS[COL_POSTER_PATCH], movie.getPosterPath());
-        cv.put(COLUMNS[COL_RELEASEDATE], movie.getReleaseDate());
+        cv.put(COLUMNS[COL_ID], pelicula.getId());
+        cv.put(COLUMNS[COL_TITLE], pelicula.getTitle());
+        cv.put(COLUMNS[COL_OVERVIEW], pelicula.getOverview());
+        cv.put(COLUMNS[COL_POSTER_PATCH], pelicula.getPosterPath());
+        cv.put(COLUMNS[COL_RELEASEDATE], pelicula.getReleaseDate());
         return cv;
     }
 
 
-    public synchronized int guardar(Movie movie) {
+    public synchronized int guardar(Pelicula pelicula) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        int id = (int) db.insertOrThrow(TABLE_NAME, null, getContentValues(movie));
+        int id = (int) db.insertOrThrow(TABLE_NAME, null, getContentValues(pelicula));
         db.close();
         helper.close();
-        movie.setId(id);
+        pelicula.setId(id);
         return id;
     }
 
-    public synchronized void update(Movie movie) {
+    public synchronized void update(Pelicula pelicula) {
         SQLiteDatabase db = helper.getWritableDatabase();
         db.update(TABLE_NAME,
-                getContentValues(movie),
+                getContentValues(pelicula),
                 COLUMNS[COL_ID] + "=?",
-                new String[]{String.valueOf(movie.getId())}
+                new String[]{String.valueOf(pelicula.getId())}
         );
         db.close();
         helper.close();
     }
 
-    public Movie getMovieById(int e) {
+    public Pelicula getMovieById(int e) {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME, COLUMNS,

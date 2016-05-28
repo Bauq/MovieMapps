@@ -37,7 +37,6 @@ public class MovieMapps extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-
     }
 
     public static Context getContext() {

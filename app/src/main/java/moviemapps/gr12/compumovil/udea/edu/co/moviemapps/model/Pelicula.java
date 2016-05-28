@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Movie {
+public class Pelicula {
 
     private Integer id;
     private String title;
