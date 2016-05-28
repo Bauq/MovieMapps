@@ -7,16 +7,6 @@ import org.junit.Test;
 public class MovieFragmentTest {
 
 	@Test
-	public void testMovieFragment() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testNewInstance() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testOnCreate() {
 		fail("Not yet implemented");
 	}
@@ -40,5 +30,4 @@ public class MovieFragmentTest {
 	public void testSetMovie() {
 		fail("Not yet implemented");
 	}
-
 }

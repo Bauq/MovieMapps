@@ -7,11 +7,6 @@ import org.junit.Test;
 public class MapaCinemasFragmentTest {
 
 	@Test
-	public void testNewInstance() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testOnCreateView() {
 		fail("Not yet implemented");
 	}

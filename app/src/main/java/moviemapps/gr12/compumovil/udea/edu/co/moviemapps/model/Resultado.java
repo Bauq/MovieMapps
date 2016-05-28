@@ -1,4 +1,4 @@
-package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.rest;
+package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model;
 
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -31,7 +29,7 @@ public class Resultado {
     @JsonProperty("page")
     private Integer page;
     @JsonProperty("results")
-    private List<Movie> results = new ArrayList<Movie>();
+    private List<Pelicula> results = new ArrayList<Pelicula>();
     @JsonProperty("total_pages")
     private Integer totalPages;
     @JsonProperty("total_results")
@@ -59,7 +57,7 @@ public class Resultado {
      * @return The results
      */
     @JsonProperty("results")
-    public List<Movie> getResults() {
+    public List<Pelicula> getResults() {
         return results;
     }
 
@@ -67,7 +65,7 @@ public class Resultado {
      * @param results The results
      */
     @JsonProperty("results")
-    public void setResults(List<Movie> results) {
+    public void setResults(List<Pelicula> results) {
         this.results = results;
     }
 

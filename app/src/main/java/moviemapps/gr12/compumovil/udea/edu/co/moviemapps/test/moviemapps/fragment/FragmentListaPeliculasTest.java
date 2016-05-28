@@ -2,23 +2,20 @@ package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.fragme
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.fragment.FragmentListaPeliculas;
 
 public class FragmentListaPeliculasTest {
 
-	@Test
-	public void testNewInstance() {
-		fail("Not yet implemented");
-	}
+	FragmentListaPeliculas fragmentListaPeliculas;
+	@Before
+	public void inicializar(){
 
-	@Test
-	public void testOnCreate() {
-		fail("Not yet implemented");
 	}
-
 	@Test
 	public void testOnCreateView() {
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -32,17 +29,7 @@ public class FragmentListaPeliculasTest {
 	}
 
 	@Test
-	public void testOnItemLongClick() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testSetMovies() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMovieValidator() {
 		fail("Not yet implemented");
 	}
 

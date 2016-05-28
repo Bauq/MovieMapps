@@ -2,7 +2,6 @@ package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.R;
-import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Movie;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.rest.MovieMappsService;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,15 +70,15 @@ public class MovieFragment extends Fragment {
         protected Response doInBackground(Void... params) {
             Response response = null;
             final Bitmap imagen;
-            Call<Movie> resultados = MovieMappsService.obtenerInstancia().movieById(idPelicula, apiKey);
-            resultados.enqueue(new Callback<Movie>() {
+            Call<Pelicula> resultados = MovieMappsService.obtenerInstancia().movieById(idPelicula, apiKey);
+            resultados.enqueue(new Callback<Pelicula>() {
                 @Override
-                public void onResponse(Call<Movie> call, Response<Movie> response) {
+                public void onResponse(Call<Pelicula> call, Response<Pelicula> response) {
                     setMovie(response.body());
                 }
 
                 @Override
-                public void onFailure(Call<Movie> call, Throwable t) {
+                public void onFailure(Call<Pelicula> call, Throwable t) {
 
                 }
 
@@ -88,11 +87,11 @@ public class MovieFragment extends Fragment {
         }
     }
 
-    public void setMovie(Movie movie) {
-        if (movie != null) {
-            tituloPelicula.setText(movie.getTitle());
-            descripcionPelicula.setText(movie.getOverview());
-            downloadImage(posterPelicula, movie.getPosterPath());
+    public void setMovie(Pelicula pelicula) {
+        if (pelicula != null) {
+            tituloPelicula.setText(pelicula.getTitle());
+            descripcionPelicula.setText(pelicula.getOverview());
+            downloadImage(posterPelicula, pelicula.getPosterPath());
         }
     }
 
