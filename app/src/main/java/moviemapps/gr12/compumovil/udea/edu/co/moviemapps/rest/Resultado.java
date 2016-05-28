@@ -48,70 +48,14 @@ public class Resultado {
     }
 
     /**
-     * @param page The page
-     */
-    @JsonProperty("page")
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    /**
      * @return The results
      */
     @JsonProperty("results")
     public List<Movie> getResults() {
         return results;
     }
+    
 
-    /**
-     * @param results The results
-     */
-    @JsonProperty("results")
-    public void setResults(List<Movie> results) {
-        this.results = results;
-    }
-
-    /**
-     * @return The totalPages
-     */
-    @JsonProperty("total_pages")
-    public Integer getTotalPages() {
-        return totalPages;
-    }
-
-    /**
-     * @param totalPages The total_pages
-     */
-    @JsonProperty("total_pages")
-    public void setTotalPages(Integer totalPages) {
-        this.totalPages = totalPages;
-    }
-
-    /**
-     * @return The totalResults
-     */
-    @JsonProperty("total_results")
-    public Integer getTotalResults() {
-        return totalResults;
-    }
-
-    /**
-     * @param totalResults The total_results
-     */
-    @JsonProperty("total_results")
-    public void setTotalResults(Integer totalResults) {
-        this.totalResults = totalResults;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 
 }
