@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.fragment.MapaCinemasFragment;
+
 public class MapaCinemasFragmentTest {
 
 	@Test
@@ -27,26 +29,6 @@ public class MapaCinemasFragmentTest {
 	}
 
 	@Test
-	public void testOnStatusChanged() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testOnProviderEnabled() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testOnProviderDisabled() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testOnDestroyView() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testOnMarkerClick() {
 		fail("Not yet implemented");
 	}
@@ -54,6 +36,11 @@ public class MapaCinemasFragmentTest {
 	@Test
 	public void testOnMyLocationButtonClick() {
 		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testDistancia(){
+
 	}
 
 	@Test

@@ -16,7 +16,7 @@ import static junit.framework.Assert.fail;
 public class testJUnit {
 
     MovieDataManager movieDataManager = null;
-    Pelicula pelicula = null;
+    Pelicula movie = null;
     String name = "Batman v Superman";
     MainActivity mainActivity;
     int i;

@@ -59,8 +59,6 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
     private List<Cinema> cinemaList = new ArrayList<>();
     private static View rootView;
-    Cinema cineCercano, selected;
-    double menorDistancia = Double.MAX_VALUE;
 
     public static MapaCinemasFragment newInstance() {
         return new MapaCinemasFragment();
@@ -130,7 +128,6 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
 
     private void cargarCinemas() {
-        Log.e("Prueba: ", "Cargar Cinemas");
         List<Cinema> listaCinemas = new ArrayList<>();
         Cinema c = new Cinema();
         c.setNombre("Cine Colombia Los Molinos");
@@ -139,13 +136,13 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
         listaCinemas.add(c);
         c = new Cinema();
         c.setNombre("Procinal Puerta del norte");
-        c.setLatitud((double) 6.339409599999999);
-        c.setLongitud((double) -75.54321419999997);
+        c.setLatitud(6.339409599999999);
+        c.setLongitud(-75.54321419999997);
         listaCinemas.add(c);
         c = new Cinema();
         c.setNombre("Procinal Florida");
-        c.setLatitud((double) 6.270901899999999);
-        c.setLongitud((double) -75.57674639999999);
+        c.setLatitud(6.270901899999999);
+        c.setLongitud(-75.57674639999999);
         listaCinemas.add(c);
         c = new Cinema();
         c.setNombre("Royal Films Bosque Plaza");
