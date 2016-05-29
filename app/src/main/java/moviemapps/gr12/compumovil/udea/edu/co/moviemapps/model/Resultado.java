@@ -46,14 +46,6 @@ public class Resultado {
     }
 
     /**
-     * @param page The page
-     */
-    @JsonProperty("page")
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    /**
      * @return The results
      */
     @JsonProperty("results")
