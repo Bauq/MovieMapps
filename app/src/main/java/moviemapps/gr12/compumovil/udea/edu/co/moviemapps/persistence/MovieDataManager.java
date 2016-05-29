@@ -73,20 +73,20 @@ public class MovieDataManager extends DataManager {
         return id;
     }
 
-    public synchronized void update(Pelicula pelicula) {
+    public synchronized int update(Pelicula pelicula) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.update(TABLE_NAME,
+        int update = db.update(TABLE_NAME,
                 getContentValues(pelicula),
                 COLUMNS[COL_ID] + "=?",
                 new String[]{String.valueOf(pelicula.getId())}
         );
         db.close();
         helper.close();
+        return update;
     }
 
     public Pelicula getMovieById(int e) {
         SQLiteDatabase db = helper.getReadableDatabase();
-
         Cursor cursor = db.query(TABLE_NAME, COLUMNS,
                 "id = ?", new String[]{String.valueOf(e)}, null, null, COLUMNS[COL_ID]);
 
