@@ -1,14 +1,32 @@
 package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.persistence;
 
-import android.test.mock.MockResources;
+
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.MovieDataManager;
 
+@RunWith(MockitoJUnitRunner.class)
 public class MovieDataManagerTest {
+    MovieDataManager movieDataManager;
+    Pelicula pelicula;
+    @Before
+    public void setUp() {
+        movieDataManager = Mockito.mock(MovieDataManager.class);
+        pelicula = new Pelicula();
+        pelicula.setId(1);
+        pelicula.setTitle("Civil war");
+        Mockito.when(movieDataManager.getMovieById(1)).thenReturn(pelicula);
+        Mockito.when(movieDataManager.guardar(pelicula)).thenReturn(1);
+        Mockito.when(movieDataManager.update(pelicula)).thenReturn(1);
+    }
 
 	@Test
 	public void testGetInstance() {
@@ -18,18 +36,20 @@ public class MovieDataManagerTest {
 
 	@Test
 	public void testGuardar() {
-		MovieDataManager movieDataManager;
-
-	}
+        int idPelicula = movieDataManager.guardar(pelicula);
+        assertEquals(1, idPelicula);
+    }
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+        int filasModificadas = movieDataManager.update(pelicula);
+        assertEquals(1, filasModificadas);
 	}
 
 	@Test
 	public void testGetMovieById() {
-		fail("Not yet implemented");
+        Pelicula peliculaRetornada = movieDataManager.getMovieById(1);
+        assertEquals(pelicula, peliculaRetornada);
 	}
 
 

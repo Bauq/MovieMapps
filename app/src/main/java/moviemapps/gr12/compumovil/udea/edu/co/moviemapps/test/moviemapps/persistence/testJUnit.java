@@ -2,10 +2,12 @@ package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.persis
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.activities.MainActivity;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.MovieDataManager;
+import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.config.DataBaseHelper;
 
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.fail;
@@ -16,6 +18,7 @@ import static junit.framework.Assert.fail;
 public class testJUnit {
 
     MovieDataManager movieDataManager = null;
+
     Pelicula pelicula = null;
     String name = "Batman v Superman";
     MainActivity mainActivity;
@@ -29,22 +32,14 @@ public class testJUnit {
     }
     @Test
     public void insertMovie(){
-
-        try {
-            pelicula.setId(i);
-            movieDataManager = MovieDataManager.getInstance();
-            int idNew = movieDataManager.guardar(pelicula);
-            assertTrue(pelicula.getId().equals(idNew));
-        }catch (Exception e){
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
+        pelicula.setId(i);
+        movieDataManager = MovieDataManager.getInstance();
+        int idNew = movieDataManager.guardar(pelicula);
+        assertTrue(pelicula.getId().equals(idNew));
     }
 
     @Test
     public void updateMovie(){
-
-        try {
             pelicula.setId(i);
             pelicula.setTitle(name);
             movieDataManager = MovieDataManager.getInstance();
@@ -52,10 +47,6 @@ public class testJUnit {
             pelicula = null;
             pelicula = movieDataManager.getMovieById(i);
             assertTrue(pelicula.getTitle().equals(name));
-        }catch (Exception e){
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
     }
 
 
