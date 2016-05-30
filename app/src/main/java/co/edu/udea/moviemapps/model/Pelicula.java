@@ -16,18 +16,9 @@ public class Pelicula {
     private String releaseDate;
     @SerializedName("poster_path")
     private String posterPath;
-    private Bitmap image;
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Bitmap getImage() {
-        return image;
-    }
-
-    public void setImage(Bitmap image) {
-        this.image = image;
     }
 
     public Integer getId() {

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import co.edu.udea.moviemapps.activities.MovieMapps;
+import co.edu.udea.moviemapps.model.Cinema;
 import co.edu.udea.moviemapps.model.Usuario;
 import co.edu.udea.moviemapps.persistence.config.DataManager;
 
@@ -94,6 +95,13 @@ public class UsuarioDataManager extends DataManager {
         cursor.close();
         helper.close();
         return null;
+    }
+
+    public void deleteUser(Usuario user) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMNS[COL_ID] + " = ?", new String[]{String.valueOf(user.getId())});
+        db.close();
+        helper.close();
     }
 }
 

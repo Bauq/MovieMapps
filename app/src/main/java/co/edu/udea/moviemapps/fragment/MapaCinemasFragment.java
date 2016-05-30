@@ -34,6 +34,7 @@ import java.util.List;
 import co.edu.udea.moviemapps.R;
 import co.edu.udea.moviemapps.listener.OnFragmentInteractionListener;
 import co.edu.udea.moviemapps.model.Cinema;
+import co.edu.udea.moviemapps.persistence.CinemaDataManager;
 
 /**
  * Created by Brian on 05/05/2016.
@@ -127,28 +128,7 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
 
     private void cargarCinemas() {
-        List<Cinema> listaCinemas = new ArrayList<>();
-        Cinema c = new Cinema();
-        c.setNombre("Cine Colombia Los Molinos");
-        c.setLatitud(6.232321400000001);
-        c.setLongitud(-75.60410279999996);
-        listaCinemas.add(c);
-        c = new Cinema();
-        c.setNombre("Procinal Puerta del norte");
-        c.setLatitud(6.339409599999999);
-        c.setLongitud(-75.54321419999997);
-        listaCinemas.add(c);
-        c = new Cinema();
-        c.setNombre("Procinal Florida");
-        c.setLatitud(6.270901899999999);
-        c.setLongitud(-75.57674639999999);
-        listaCinemas.add(c);
-        c = new Cinema();
-        c.setNombre("Royal Films Bosque Plaza");
-        c.setLatitud((double) 6.268674619223301);
-        c.setLongitud((double) -75.56475877761841);
-        listaCinemas.add(c);
-        cinemaList = listaCinemas;
+        cinemaList = CinemaDataManager.getInstance().getAllCinemas();
         marcarCinemas();
     }
 
