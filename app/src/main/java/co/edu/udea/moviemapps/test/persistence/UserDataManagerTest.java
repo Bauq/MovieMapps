@@ -4,7 +4,7 @@ import android.test.AndroidTestCase;
 
 import org.junit.Test;
 
-public class UsuarioDataManagerTest extends AndroidTestCase{
+public class UserDataManagerTest extends AndroidTestCase{
 
 	@Test
 	public void testGetInstance() {

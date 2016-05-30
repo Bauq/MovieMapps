@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class FragmentLoginTest {
+public class LoginTest {
 
 	@Test
 	public void testNewInstance() {

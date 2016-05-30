@@ -1,14 +1,14 @@
 package co.edu.udea.moviemapps.model;
 
 
-public class Usuario {
+public class User {
 
     private Long id;
     private String name;
     private String photo;
     private String email;
 
-    public Usuario() {
+    public User() {
         this.id = (long) 1;
     }
 

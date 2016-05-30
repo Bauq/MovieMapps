@@ -3,17 +3,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/cines"
+            android:id="@+id/showtimes"
             android:icon="@mipmap/cine"
-            android:title="@string/cartelera" />
+            android:title="@string/showtimes" />
         <item
-            android:id="@+id/armaPlan"
+            android:id="@+id/make_plan"
             android:icon="@mipmap/amigos"
-            android:title="@string/armaPlan" />
+            android:title="@string/movie_with_friends" />
         <item
-            android:id="@+id/mapa"
+            android:id="@+id/map"
             android:icon="@mipmap/map"
-            android:title="@string/mapa" />
+            android:title="@string/map" />
     </group>
 
 </menu>

@@ -1,13 +1,11 @@
 package co.edu.udea.moviemapps.model;
 
-/**
- * Created by Samuel on 12/04/2016.
- */
+
 import android.graphics.Bitmap;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Pelicula {
+public class Movie {
 
     private Integer id;
     private String title;
@@ -16,18 +14,9 @@ public class Pelicula {
     private String releaseDate;
     @SerializedName("poster_path")
     private String posterPath;
-    private Bitmap image;
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Bitmap getImage() {
-        return image;
-    }
-
-    public void setImage(Bitmap image) {
-        this.image = image;
     }
 
     public Integer getId() {

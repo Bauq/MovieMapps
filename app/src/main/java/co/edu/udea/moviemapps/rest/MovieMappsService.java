@@ -10,17 +10,13 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * @author Samuel Arenas
- * @version 1.0.0
- * @date 05/08/2015
- */
+
 public class MovieMappsService {
 
     public static final String BASE_URL = "https://api.themoviedb.org/3/";
     private static MovieMappsServiceI instance;
 
-    public static MovieMappsServiceI obtenerInstancia() {
+    public static MovieMappsServiceI getInstance() {
         if (instance == null) {
             Interceptor requestInterceptor = new Interceptor() {
                 @Override

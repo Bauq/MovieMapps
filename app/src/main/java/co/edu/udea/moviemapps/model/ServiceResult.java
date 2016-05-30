@@ -22,12 +22,12 @@ import java.util.Map;
         "total_results"
 })
 
-public class Resultado {
+public class ServiceResult {
 
     @JsonProperty("page")
     private Integer page;
     @JsonProperty("results")
-    private List<Pelicula> results = new ArrayList<Pelicula>();
+    private List<Movie> results = new ArrayList<Movie>();
     @JsonProperty("total_pages")
     private Integer totalPages;
     @JsonProperty("total_results")
@@ -41,12 +41,12 @@ public class Resultado {
     }
 
     @JsonProperty("results")
-    public List<Pelicula> getResults() {
+    public List<Movie> getResults() {
         return results;
     }
 
     @JsonProperty("results")
-    public void setResults(List<Pelicula> results) {
+    public void setResults(List<Movie> results) {
         this.results = results;
     }
 

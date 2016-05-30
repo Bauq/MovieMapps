@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class MapaCinemasFragmentTest {
+public class CinemasMapTest {
 
 	@Test
 	public void testOnCreateView() {

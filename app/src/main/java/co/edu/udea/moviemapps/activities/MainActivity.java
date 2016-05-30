@@ -11,25 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
 import co.edu.udea.moviemapps.R;
-import co.edu.udea.moviemapps.fragment.FragmentListaPeliculas;
-import co.edu.udea.moviemapps.fragment.FragmentLogin;
-import co.edu.udea.moviemapps.fragment.MapaCinemasFragment;
-import co.edu.udea.moviemapps.fragment.MovieFragment;
+import co.edu.udea.moviemapps.fragment.Movies;
+import co.edu.udea.moviemapps.fragment.Login;
+import co.edu.udea.moviemapps.fragment.CinemasMap;
+import co.edu.udea.moviemapps.fragment.MovieDetail;
 import co.edu.udea.moviemapps.listener.OnFragmentInteractionListener;
 
-/**
- * Created by Samuel on 05/04/2016.
- */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener {
     public MainActivity() {
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setFragment(FragmentListaPeliculas.ID, null, true);
+        setFragment(Movies.ID, null, true);
     }
 
     @Override
@@ -70,14 +65,14 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         switch (id){
-            case(R.id.cines):
-                setFragment(FragmentListaPeliculas.ID, null, true);
+            case(R.id.showtimes):
+                setFragment(Movies.ID, null, true);
                 break;
-            case(R.id.armaPlan):
-                setFragment(FragmentLogin.ID, null, true);
+            case(R.id.make_plan):
+                setFragment(Login.ID, null, true);
                 break;
-            case(R.id.mapa):
-                setFragment(MapaCinemasFragment.ID, null, true);
+            case(R.id.map):
+                setFragment(CinemasMap.ID, null, true);
                 break;
         }
 
@@ -90,18 +85,18 @@ public class MainActivity extends AppCompatActivity
     public void setFragment(int fragmentId, Bundle parameters, boolean addStack) {
         Fragment f = null;
         switch (fragmentId) {
-            case FragmentListaPeliculas.ID:
-                f = FragmentListaPeliculas.newInstance();
+            case Movies.ID:
+                f = Movies.newInstance();
                 break;
-            case MovieFragment.ID:
-                parameters.getString(MovieFragment.ARG_ID_PELICULA);
-                f = MovieFragment.newInstance(parameters.getString(MovieFragment.ARG_ID_PELICULA));
+            case MovieDetail.ID:
+                parameters.getString(MovieDetail.MOVIE_ARG_ID);
+                f = MovieDetail.newInstance(parameters.getString(MovieDetail.MOVIE_ARG_ID));
                 break;
-            case FragmentLogin.ID:
-                f = FragmentLogin.newInstance();
+            case Login.ID:
+                f = Login.newInstance();
                 break;
-            case MapaCinemasFragment.ID:
-                f= MapaCinemasFragment.newInstance();
+            case CinemasMap.ID:
+                f= CinemasMap.newInstance();
                 break;
         }
 

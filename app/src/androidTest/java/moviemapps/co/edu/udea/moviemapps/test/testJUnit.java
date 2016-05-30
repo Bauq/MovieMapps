@@ -3,11 +3,9 @@ package moviemapps.co.edu.udea.moviemapps.test;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import co.edu.udea.moviemapps.activities.MainActivity;
-import co.edu.udea.moviemapps.model.Pelicula;
+import co.edu.udea.moviemapps.model.Movie;
 import co.edu.udea.moviemapps.persistence.MovieDataManager;
 
 import static junit.framework.Assert.assertTrue;
@@ -19,15 +17,15 @@ import static org.mockito.Mockito.when;
  */
 public class testJUnit {
     MovieDataManager movieDataManager = null;
-    Pelicula pelicula = null;
+    Movie movie = null;
     String name = "Batman v Superman";
     int i;
     @Before
     public void setup() {
-        pelicula = Mockito.mock(Pelicula.class);
+        movie = Mockito.mock(Movie.class);
         i = 21312;
-        when(pelicula.getId()).thenReturn(i);
-        when(pelicula.getTitle()).thenReturn(name);
+        when(movie.getId()).thenReturn(i);
+        when(movie.getTitle()).thenReturn(name);
     }
 
     @After
@@ -37,29 +35,29 @@ public class testJUnit {
 
     @Test
     public void insertMovie(){
-        pelicula.setId(i);
+        movie.setId(i);
         movieDataManager = MovieDataManager.getInstance();
-        int idNew = movieDataManager.guardar(pelicula);
-        assertTrue(pelicula.getId().equals(idNew));
+        int idNew = movieDataManager.insert(movie);
+        assertTrue(movie.getId().equals(idNew));
     }
 
     @Test
     public void updateMovie(){
-        pelicula.setId(i);
-        pelicula.setTitle(name);
+        movie.setId(i);
+        movie.setTitle(name);
         movieDataManager = MovieDataManager.getInstance();
-        movieDataManager.update(pelicula);
-        pelicula = null;
-        pelicula = movieDataManager.getMovieById(i);
-        assertTrue(pelicula.getTitle().equals(name));
+        movieDataManager.update(movie);
+        movie = null;
+        movie = movieDataManager.getMovieById(i);
+        assertTrue(movie.getTitle().equals(name));
     }
 
     @Test
     public void getMovie(){
-        pelicula.setId(i);
-        pelicula.setTitle(name);
+        movie.setId(i);
+        movie.setTitle(name);
         movieDataManager = MovieDataManager.getInstance();
-        pelicula = movieDataManager.getMovieById(i);
-        assertTrue(pelicula.getTitle().equals(name));
+        movie = movieDataManager.getMovieById(i);
+        assertTrue(movie.getTitle().equals(name));
     }
 }

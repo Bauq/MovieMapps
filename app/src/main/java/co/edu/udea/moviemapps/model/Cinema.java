@@ -1,8 +1,6 @@
 package co.edu.udea.moviemapps.model;
 
-/**
- * Created by Brian on 05/05/2016.
- */
+
 public class Cinema {
 
     int id;

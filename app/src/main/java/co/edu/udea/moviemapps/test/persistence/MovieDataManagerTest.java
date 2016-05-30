@@ -10,25 +10,25 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import co.edu.udea.moviemapps.model.Pelicula;
+import co.edu.udea.moviemapps.model.Movie;
 import co.edu.udea.moviemapps.persistence.MovieDataManager;
 
 @RunWith(MockitoJUnitRunner.class)
 public class MovieDataManagerTest extends AndroidTestCase {
     MovieDataManager movieDataManager;
-    Pelicula pelicula;
+    Movie movie;
 
     @Before
     public void setUp() {
         movieDataManager = Mockito.mock(MovieDataManager.class);
 
-        pelicula = new Pelicula();
-        pelicula.setId(1);
-        pelicula.setTitle("Civil war");
-        pelicula.setOverview("Muy buena");
-        when(movieDataManager.getMovieById(1)).thenReturn(pelicula);
-        when(movieDataManager.guardar(pelicula)).thenReturn(1);
-        when(movieDataManager.update(pelicula)).thenReturn(1);
+        movie = new Movie();
+        movie.setId(1);
+        movie.setTitle("Civil war");
+        movie.setOverview("Muy buena");
+        when(movieDataManager.getMovieById(1)).thenReturn(movie);
+        when(movieDataManager.insert(movie)).thenReturn(1);
+        when(movieDataManager.update(movie)).thenReturn(1);
     }
 
 	@Test
@@ -39,19 +39,19 @@ public class MovieDataManagerTest extends AndroidTestCase {
 
 	@Test
 	public void testGuardar() {
-        int idPelicula = movieDataManager.guardar(pelicula);
+        int idPelicula = movieDataManager.insert(movie);
         assertEquals(1, idPelicula);
     }
 
 	@Test
 	public void testUpdate() {
-        int filasModificadas = movieDataManager.update(pelicula);
+        int filasModificadas = movieDataManager.update(movie);
         assertEquals(1, filasModificadas);
 	}
 
 	@Test
 	public void testGetMovieById() {
-        Pelicula peliculaRetornada = movieDataManager.getMovieById(1);
-        assertEquals(pelicula, peliculaRetornada);
+        Movie movieRetornada = movieDataManager.getMovieById(1);
+        assertEquals(movie, movieRetornada);
 	}
 }

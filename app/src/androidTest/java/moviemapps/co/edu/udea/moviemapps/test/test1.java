@@ -1,29 +1,27 @@
 package moviemapps.co.edu.udea.moviemapps.test;
 import org.junit.Test;
 
-import co.edu.udea.moviemapps.model.Usuario;
-import co.edu.udea.moviemapps.persistence.UsuarioDataManager;
+import co.edu.udea.moviemapps.model.User;
+import co.edu.udea.moviemapps.persistence.UserDataManager;
 
 import static org.junit.Assert.*;
-/**
- * Created by SA on 17/04/2016.
- */
+
 public class test1 {
 
     @Test
     public void Insertar(){
-        Usuario usuario = new Usuario();
-        usuario.setEmail("samuelarenas@hotmail.es");
-        usuario.setPhoto("");
-        usuario.setName("Samuel Arenas");
-        usuario.setId((long)123456789);
-        long id =UsuarioDataManager.getInstance().guardar(usuario);
-        assertEquals(id,(long)usuario.getId());
+        User user = new User();
+        user.setEmail("samuelarenas@hotmail.es");
+        user.setPhoto("");
+        user.setName("Samuel Arenas");
+        user.setId((long)123456789);
+        long id = UserDataManager.getInstance().insert(user);
+        assertEquals(id,(long) user.getId());
     }
 
     @Test
     public void UsuarioExiste(){
-        Usuario usuario = UsuarioDataManager.getInstance().getUsuarioById(1);
-        assertEquals("Samuel Arenas",usuario.getName());
+        User user = UserDataManager.getInstance().getUserById(1);
+        assertEquals("Samuel Arenas", user.getName());
     }
 }

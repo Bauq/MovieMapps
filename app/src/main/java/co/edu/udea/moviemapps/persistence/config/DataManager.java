@@ -9,5 +9,4 @@ public class DataManager {
     public DataManager(Context context) {
         helper = new DataBaseHelper(context, DataBaseHelper.DB_NAME, DataBaseHelper.DB_ACTUAL_VERSION);
     }
-
 }

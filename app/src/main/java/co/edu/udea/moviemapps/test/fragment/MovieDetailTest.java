@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class MovieFragmentTest {
+public class MovieDetailTest {
 
 	@Test
 	public void testOnCreate() {

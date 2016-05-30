@@ -2,13 +2,11 @@ package co.edu.udea.moviemapps.listener;
 
 import android.view.View;
 
-import co.edu.udea.moviemapps.model.Pelicula;
+import co.edu.udea.moviemapps.model.Movie;
 
-/**
- * Created by Carolina on 29/03/2016.
- */
+
 public interface OnItemMovieListener {
 
-    void onItemClick(Pelicula pelicula, View view, int position);
+    void onItemClick(Movie movie, View view, int position);
 
 }

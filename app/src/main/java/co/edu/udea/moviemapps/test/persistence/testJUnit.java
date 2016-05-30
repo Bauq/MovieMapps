@@ -7,7 +7,7 @@ import org.junit.Test;
 
 
 import co.edu.udea.moviemapps.activities.MainActivity;
-import co.edu.udea.moviemapps.model.Pelicula;
+import co.edu.udea.moviemapps.model.Movie;
 import co.edu.udea.moviemapps.persistence.MovieDataManager;
 
 
@@ -18,7 +18,7 @@ public class testJUnit extends AndroidTestCase {
 
     MovieDataManager movieDataManager = null;
 
-    Pelicula pelicula = null;
+    Movie movie = null;
     String name = "Batman v Superman";
     MainActivity mainActivity;
     int i;
@@ -26,36 +26,36 @@ public class testJUnit extends AndroidTestCase {
     public void initValidString() {
         // Specify a valid string.
 
-        pelicula = new Pelicula();
+        movie = new Movie();
         i = 21312;
     }
     @Test
     public void insertMovie(){
-        pelicula.setId(i);
+        movie.setId(i);
         movieDataManager = MovieDataManager.getInstance();
-        int idNew = movieDataManager.guardar(pelicula);
-        assertTrue(pelicula.getId().equals(idNew));
+        int idNew = movieDataManager.insert(movie);
+        assertTrue(movie.getId().equals(idNew));
     }
 
     @Test
     public void updateMovie(){
-            pelicula.setId(i);
-            pelicula.setTitle(name);
+            movie.setId(i);
+            movie.setTitle(name);
             movieDataManager = MovieDataManager.getInstance();
-            movieDataManager.update(pelicula);
-            pelicula = null;
-            pelicula = movieDataManager.getMovieById(i);
-            assertTrue(pelicula.getTitle().equals(name));
+            movieDataManager.update(movie);
+            movie = null;
+            movie = movieDataManager.getMovieById(i);
+            assertTrue(movie.getTitle().equals(name));
     }
 
 
 
     @Test
     public void getMovie(){
-            pelicula.setId(i);
-            pelicula.setTitle(name);
+            movie.setId(i);
+            movie.setTitle(name);
             movieDataManager = MovieDataManager.getInstance();
-            pelicula = movieDataManager.getMovieById(i);
-            assertTrue(pelicula.getTitle().equals(name));
+            movie = movieDataManager.getMovieById(i);
+            assertTrue(movie.getTitle().equals(name));
     }
 }

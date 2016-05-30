@@ -1,6 +1,5 @@
 package co.edu.udea.moviemapps.persistence;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,25 +11,21 @@ import co.edu.udea.moviemapps.activities.MovieMapps;
 import co.edu.udea.moviemapps.model.Cinema;
 import co.edu.udea.moviemapps.persistence.config.DataManager;
 
-/**
- * Created by hp on 29/05/2016.
- */
-public class CinemaDataManager extends DataManager {
 
-    private static CinemaDataManager instance;
+public class CinemaDataManager extends DataManager {
 
     public static final String TABLE_NAME = "cinema";
 
     public static final int COL_ID = 0,
-            COL_NOMBRE = 1,
-            COL_LATITUD = 2,
-            COL_LONGITUD = 3;
+            COL_NAME = 1,
+            COL_LATITUDE = 2,
+            COL_LONGITUDE = 3;
 
     public static final String[] COLUMNS = {
             "id",
-            "nombre",
-            "latitud",
-            "longitud"
+            "name",
+            "latitude",
+            "longitude"
     };
 
     public CinemaDataManager(Context context) {
@@ -38,28 +33,16 @@ public class CinemaDataManager extends DataManager {
     }
 
     public static CinemaDataManager getInstance() {
-        if (instance == null) {
-            instance = new CinemaDataManager(MovieMapps.getContext());
-        }
-        return instance;
+        return new CinemaDataManager(MovieMapps.getContext());
     }
 
     private synchronized  Cinema getCinemaFromCursor(Cursor cursor){
         Cinema cinema = new Cinema();
         cinema.setId(cursor.getInt(COL_ID));
-        cinema.setName(cursor.getString(COL_NOMBRE));
-        cinema.setLatitude(cursor.getDouble(COL_LATITUD));
-        cinema.setLongitude(cursor.getDouble(COL_LONGITUD));
+        cinema.setName(cursor.getString(COL_NAME));
+        cinema.setLatitude(cursor.getDouble(COL_LATITUDE));
+        cinema.setLongitude(cursor.getDouble(COL_LONGITUDE));
         return cinema;
-    }
-
-    private synchronized ContentValues getContentValues(Cinema cinema){
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMNS[COL_ID], cinema.getId());
-        cv.put(COLUMNS[COL_NOMBRE], cinema.getName());
-        cv.put(COLUMNS[COL_LATITUD], cinema.getLatitude());
-        cv.put(COLUMNS[COL_LONGITUD], cinema.getLongitude());
-        return cv;
     }
 
     public List<Cinema> getAllCinemas() {

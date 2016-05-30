@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import co.edu.udea.moviemapps.fragment.FragmentListaPeliculas;
+import co.edu.udea.moviemapps.fragment.Movies;
 
-public class FragmentListaPeliculasTest {
+public class MoviesTest {
 
-	FragmentListaPeliculas fragmentListaPeliculas;
+	Movies movies;
 	@Before
 	public void inicializar(){
 

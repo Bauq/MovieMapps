@@ -37,23 +37,22 @@ import java.util.Arrays;
 
 import co.edu.udea.moviemapps.activities.MovieMapps;
 import co.edu.udea.moviemapps.R;
-import co.edu.udea.moviemapps.model.Usuario;
-import co.edu.udea.moviemapps.persistence.UsuarioDataManager;
+import co.edu.udea.moviemapps.model.User;
+import co.edu.udea.moviemapps.persistence.UserDataManager;
 
-/**
- * Created by Sebastian on 11/04/2016.
- */
-public class FragmentLogin extends Fragment {
+
+public class Login extends Fragment {
     public static final int ID = 3;
     CallbackManager callbackManager;
     ProfileTracker profileTracker;
     Toast toast;
-    TextView nombreUsuario;
-    ImageView imagenUsuario;
-    Usuario usuario;
+    TextView userName;
+    ImageView userProfilePicture;
+    User user;
+    MovieMapps movieMapps = new MovieMapps();
 
-    public static FragmentLogin newInstance() {
-        return new FragmentLogin();
+    public static Login newInstance() {
+        return new Login();
     }
 
     @Override
@@ -63,55 +62,47 @@ public class FragmentLogin extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.login_fragment, container, false);
         return view;
     }
 
-    private void mostrarUsuario(Profile currentProfile) {
-        usuario = MovieMapps.getUsuario();
-        if (usuario != null) {
-            cargarImagen.execute(usuario.getPhoto());
-            nombreUsuario.setText(usuario.getName());
-            toast = Toast.makeText(MovieMapps.getContext(), usuario.getName(), Toast.LENGTH_LONG);
+    private void showUser(Profile currentProfile) {
+        user = movieMapps.getUser();
+        if (user != null) {
+            downloadImage.execute(user.getPhoto());
+            userName.setText(user.getName());
+            toast = Toast.makeText(MovieMapps.getContext(), user.getName(), Toast.LENGTH_LONG);
             toast.show();
         } else if (currentProfile != null) {
-            usuario = new Usuario();
-            usuario.setName(currentProfile.getName());
-
-            Uri uriFotoPerfil = currentProfile.getProfilePictureUri(200, 200);
-            cargarImagen.execute(uriFotoPerfil.toString());
-            usuario.setPhoto(uriFotoPerfil.toString());
-            actualizarUsuario(usuario);
-            toast = Toast.makeText(MovieMapps.getContext(), usuario.getName(), Toast.LENGTH_LONG);
+            user = new User();
+            user.setName(currentProfile.getName());
+            Uri profilePictureUri = currentProfile.getProfilePictureUri(200, 200);
+            downloadImage.execute(profilePictureUri.toString());
+            user.setPhoto(profilePictureUri.toString());
+            updateUser(user);
+            toast = Toast.makeText(MovieMapps.getContext(), user.getName(), Toast.LENGTH_LONG);
             toast.show();
         }
-
     }
 
-    private void actualizarUsuario(Usuario user) {
-        this.usuario = user;
-        MovieMapps.setUsuario(user);
-        UsuarioDataManager.getInstance().update(this.usuario);
+    private void updateUser(User user) {
+        this.user = user;
+        movieMapps.setUser(user);
+        UserDataManager.getInstance().update(this.user);
     }
-
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         FacebookSdk.sdkInitialize(MovieMapps.getContext());
         callbackManager = CallbackManager.Factory.create();
-
         LoginButton loginButton = (LoginButton) view.findViewById(R.id.login_button);
-        nombreUsuario = (TextView) view.findViewById(R.id.nombre);
-        imagenUsuario = (ImageView) view.findViewById(R.id.imagen);
-
+        userName = (TextView) view.findViewById(R.id.name);
+        userProfilePicture = (ImageView) view.findViewById(R.id.image);
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
-
-        // If using in a fragment
         loginButton.setFragment(this);
 
-        // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -121,12 +112,12 @@ public class FragmentLogin extends Fragment {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
-                                    usuario = MovieMapps.getUsuario();
-                                    usuario.setId(Long.valueOf(object.getString("id")));
-                                    usuario.setEmail(object.getString("email"));
-                                    actualizarUsuario(usuario);
+                                    user = movieMapps.getUser();
+                                    user.setId(Long.valueOf(object.getString("id")));
+                                    user.setEmail(object.getString("email"));
+                                    updateUser(user);
                                 } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    Log.e("ERROR", "JSON parse failed at onCompleted: ", e);
                                 }
                             }
                         });
@@ -138,7 +129,7 @@ public class FragmentLogin extends Fragment {
 
             @Override
             public void onCancel() {
-                Log.i("login", "cancelado");
+                Log.i("login", "Canceled");
             }
 
             @Override
@@ -151,8 +142,8 @@ public class FragmentLogin extends Fragment {
             protected void onCurrentProfileChanged(
                     Profile oldProfile,
                     Profile currentProfile) {
-                mostrarUsuario(oldProfile);
-                mostrarUsuario(currentProfile);
+                showUser(oldProfile);
+                showUser(currentProfile);
             }
         };
     }
@@ -163,28 +154,28 @@ public class FragmentLogin extends Fragment {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    AsyncTask<String, Void, Bitmap> cargarImagen = new AsyncTask<String, Void, Bitmap>() {
+    AsyncTask<String, Void, Bitmap> downloadImage = new AsyncTask<String, Void, Bitmap>() {
         @Override
         protected Bitmap doInBackground(String... params) {
 
             URL imageUrl;
-            Bitmap imagen = null;
+            Bitmap image = null;
             try {
                 imageUrl = new URL(params[0]);
                 HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
                 conn.connect();
-                imagen = BitmapFactory.decodeStream(conn.getInputStream());
+                image = BitmapFactory.decodeStream(conn.getInputStream());
             } catch (IOException e) {
-                Toast.makeText(MovieMapps.getContext(), "Error cargando la imagen: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e("ERROR", "Load image failed at doInBackground: ", e);
                 e.printStackTrace();
             }
-            return imagen;
+            return image;
         }
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-            imagenUsuario.setImageBitmap(bitmap);
+            userProfilePicture.setImageBitmap(bitmap);
             this.cancel(true);
         }
     };

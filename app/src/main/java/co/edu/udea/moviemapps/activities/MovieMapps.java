@@ -3,29 +3,20 @@ package co.edu.udea.moviemapps.activities;
 import android.app.Application;
 import android.content.Context;
 
-import co.edu.udea.moviemapps.model.Usuario;
-import co.edu.udea.moviemapps.persistence.UsuarioDataManager;
+import co.edu.udea.moviemapps.model.User;
+import co.edu.udea.moviemapps.persistence.UserDataManager;
 
 
-/**
- * @author Samuel Arenas
- * @version 1.0.0
- * @date  17/04/16
-
- */
 public class MovieMapps extends Application {
     private static Context context;
-    private static Usuario usuario;
+    private static User user;
 
-    public static Usuario getUsuario() {
-        if (usuario == null){
-            usuario = UsuarioDataManager.getInstance().getUsuarioById(1);
-        }
-        return usuario;
+    public User getUser() {
+        return user == null ? UserDataManager.getInstance().getUserById(1) : user;
     }
 
-    public static void setUsuario(Usuario usuario) {
-        MovieMapps.usuario = usuario;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
