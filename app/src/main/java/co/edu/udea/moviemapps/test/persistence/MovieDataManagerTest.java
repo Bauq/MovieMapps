@@ -1,4 +1,4 @@
-package co.edu.udea.moviemapps.test.moviemapps.persistence;
+package co.edu.udea.moviemapps.test.persistence;
 
 
 import android.test.AndroidTestCase;

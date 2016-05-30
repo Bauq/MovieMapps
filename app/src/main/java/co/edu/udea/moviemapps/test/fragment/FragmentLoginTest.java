@@ -1,4 +1,4 @@
-package co.edu.udea.moviemapps.test.moviemapps.fragment;
+package co.edu.udea.moviemapps.test.fragment;
 
 import static org.junit.Assert.*;
 
