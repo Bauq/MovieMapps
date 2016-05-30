@@ -1,8 +1,8 @@
 package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.persistence;
 
 
-
-import static org.junit.Assert.*;
+import android.test.AndroidTestCase;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,19 +12,25 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.MovieDataManager;
+
+
+
 @RunWith(MockitoJUnitRunner.class)
-public class MovieDataManagerTest {
+public class MovieDataManagerTest extends AndroidTestCase {
     MovieDataManager movieDataManager;
     Pelicula pelicula;
+
     @Before
     public void setUp() {
         movieDataManager = Mockito.mock(MovieDataManager.class);
+
         pelicula = new Pelicula();
         pelicula.setId(1);
         pelicula.setTitle("Civil war");
-        Mockito.when(movieDataManager.getMovieById(1)).thenReturn(pelicula);
-        Mockito.when(movieDataManager.guardar(pelicula)).thenReturn(1);
-        Mockito.when(movieDataManager.update(pelicula)).thenReturn(1);
+        pelicula.setOverview("Muy buena");
+        when(movieDataManager.getMovieById(1)).thenReturn(pelicula);
+        when(movieDataManager.guardar(pelicula)).thenReturn(1);
+        when(movieDataManager.update(pelicula)).thenReturn(1);
     }
 
 	@Test
@@ -50,5 +56,4 @@ public class MovieDataManagerTest {
         Pelicula peliculaRetornada = movieDataManager.getMovieById(1);
         assertEquals(pelicula, peliculaRetornada);
 	}
-
 }

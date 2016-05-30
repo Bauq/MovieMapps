@@ -85,7 +85,7 @@ public class UsuarioDataManager extends DataManager {
         SQLiteDatabase db = helper.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME, COLUMNS,
-                "id > ?", new String[]{String.valueOf(e)}, null, null, COLUMNS[COL_ID]);
+                "id = ?", new String[]{String.valueOf(e)}, null, null, COLUMNS[COL_ID]);
 
         if (cursor.moveToNext()) {
             return getUsuarioFromCursor(cursor);

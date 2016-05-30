@@ -1,10 +1,12 @@
 package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.persistence;
 
+import android.test.AndroidTestCase;
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class UsuarioDataManagerTest {
+public class UsuarioDataManagerTest extends AndroidTestCase{
 
 	@Test
 	public void testGetInstance() {

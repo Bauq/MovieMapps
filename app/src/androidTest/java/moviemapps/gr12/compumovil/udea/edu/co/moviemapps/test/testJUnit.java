@@ -14,7 +14,6 @@ import static junit.framework.Assert.fail;
  * Created by SA on 17/04/2016.
  */
 public class testJUnit {
-
     MovieDataManager movieDataManager = null;
     Pelicula pelicula = null;
     String name = "Batman v Superman";
@@ -22,56 +21,35 @@ public class testJUnit {
     int i;
     @Before
     public void initValidString() {
-        // Specify a valid string.
-
-        movie = new Pelicula();
+        pelicula = new Pelicula();
         i = 21312;
     }
+
     @Test
     public void insertMovie(){
-
-        try {
-            movie.setId(i);
-            movieDataManager = MovieDataManager.getInstance();
-            int idNew = movieDataManager.guardar(movie);
-            assertTrue(movie.getId().equals(idNew));
-        }catch (Exception e){
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
+        pelicula.setId(i);
+        movieDataManager = MovieDataManager.getInstance();
+        int idNew = movieDataManager.guardar(pelicula);
+        assertTrue(pelicula.getId().equals(idNew));
     }
 
     @Test
     public void updateMovie(){
-
-        try {
-            movie.setId(i);
-            movie.setTitle(name);
-            movieDataManager = MovieDataManager.getInstance();
-            movieDataManager.update(movie);
-            movie = null;
-            movie = movieDataManager.getMovieById(i);
-            assertTrue(movie.getTitle().equals(name));
-        }catch (Exception e){
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
+        pelicula.setId(i);
+        pelicula.setTitle(name);
+        movieDataManager = MovieDataManager.getInstance();
+        movieDataManager.update(pelicula);
+        pelicula = null;
+        pelicula = movieDataManager.getMovieById(i);
+        assertTrue(pelicula.getTitle().equals(name));
     }
-
-
 
     @Test
     public void getMovie(){
-
-        try {
-            movie.setId(i);
-            movie.setTitle(name);
-            movieDataManager = MovieDataManager.getInstance();
-            movie = movieDataManager.getMovieById(i);
-            assertTrue(movie.getTitle().equals(name));
-        }catch (Exception e){
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
+        pelicula.setId(i);
+        pelicula.setTitle(name);
+        movieDataManager = MovieDataManager.getInstance();
+        pelicula = movieDataManager.getMovieById(i);
+        assertTrue(pelicula.getTitle().equals(name));
     }
 }

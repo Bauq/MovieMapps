@@ -18,6 +18,15 @@ android {
         resultsDir = "${project.buildDir}/foo/results"
     }
 
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/MANIFEST.MF'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -63,5 +72,7 @@ dependencies {
     compile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    testCompile "org.robolectric:robolectric:3.0"
     compile 'org.mockito:mockito-core:1.9.5'
+    compile 'org.robolectric:robolectric:3.0'
 }

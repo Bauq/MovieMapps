@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.activities.MovieMapps;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
