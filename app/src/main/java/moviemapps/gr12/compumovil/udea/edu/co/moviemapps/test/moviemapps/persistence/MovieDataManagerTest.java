@@ -2,6 +2,10 @@ package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.test.moviemapps.persis
 
 
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+import android.test.AndroidTestCase;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -14,18 +18,26 @@ import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.MovieDataManager;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MovieDataManagerTest {
+public class MovieDataManagerTest extends AndroidTestCase{
     MovieDataManager movieDataManager;
+    SQLiteDatabase sqLiteDatabase;
     Pelicula pelicula;
     @Before
     public void setUp() {
-        movieDataManager = Mockito.mock(MovieDataManager.class);
+        sqLiteDatabase = Mockito.mock(SQLiteDatabase.class);
+
         pelicula = new Pelicula();
         pelicula.setId(1);
         pelicula.setTitle("Civil war");
-        Mockito.when(movieDataManager.getMovieById(1)).thenReturn(pelicula);
-        Mockito.when(movieDataManager.guardar(pelicula)).thenReturn(1);
-        Mockito.when(movieDataManager.update(pelicula)).thenReturn(1);
+
+        ContentValues cv = new ContentValues();
+        cv.put("id", pelicula.getId());
+        cv.put("title", pelicula.getTitle());
+       /* cv.put("overview", pelicula.getOverview());
+        cv.put("releasedate", pelicula.getPosterPath());
+        cv.put("posterpatch", pelicula.getReleaseDate());
+        */
+        Mockito.when(sqLiteDatabase.update("movie", cv, "id =?", new String[]{String.valueOf(pelicula.getId())})).thenReturn(1);
     }
 
 	@Test

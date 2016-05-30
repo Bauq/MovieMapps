@@ -5,6 +5,7 @@ package moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model;
  */
 public class Cinema {
 
+    int id;
     String nombre;
     Double latitud, longitud;
 
@@ -31,5 +32,13 @@ public class Cinema {
 
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }
