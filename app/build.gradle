@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "co.edu.udea.udea.edu.co."
+        applicationId "co.edu.udea.moviemapps"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1

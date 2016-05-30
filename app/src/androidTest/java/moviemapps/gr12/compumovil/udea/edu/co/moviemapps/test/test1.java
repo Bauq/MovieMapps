@@ -1,12 +1,12 @@
-package co.edu.udea.udea.edu.co.moviemapps.test;
+package co.edu.udea.moviemapps.test;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.Iterator;
 
-import co.edu.udea.udea.edu.co.moviemapps.model.Pelicula;
-import co.edu.udea.udea.edu.co.moviemapps.model.Usuario;
-import co.edu.udea.udea.edu.co.moviemapps.persistence.UsuarioDataManager;
+import co.edu.udea.moviemapps.model.Pelicula;
+import co.edu.udea.moviemapps.model.Usuario;
+import co.edu.udea.moviemapps.persistence.UsuarioDataManager;
 
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
