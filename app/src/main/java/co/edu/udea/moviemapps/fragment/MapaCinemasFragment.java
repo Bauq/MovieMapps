@@ -129,24 +129,24 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
     private void cargarCinemas() {
         List<Cinema> listaCinemas = new ArrayList<>();
         Cinema c = new Cinema();
-        c.setNombre("Cine Colombia Los Molinos");
-        c.setLatitud(6.232321400000001);
-        c.setLongitud(-75.60410279999996);
+        c.setName("Cine Colombia Los Molinos");
+        c.setLatitude(6.232321400000001);
+        c.setLongitude(-75.60410279999996);
         listaCinemas.add(c);
         c = new Cinema();
-        c.setNombre("Procinal Puerta del norte");
-        c.setLatitud(6.339409599999999);
-        c.setLongitud(-75.54321419999997);
+        c.setName("Procinal Puerta del norte");
+        c.setLatitude(6.339409599999999);
+        c.setLongitude(-75.54321419999997);
         listaCinemas.add(c);
         c = new Cinema();
-        c.setNombre("Procinal Florida");
-        c.setLatitud(6.270901899999999);
-        c.setLongitud(-75.57674639999999);
+        c.setName("Procinal Florida");
+        c.setLatitude(6.270901899999999);
+        c.setLongitude(-75.57674639999999);
         listaCinemas.add(c);
         c = new Cinema();
-        c.setNombre("Royal Films Bosque Plaza");
-        c.setLatitud((double) 6.268674619223301);
-        c.setLongitud((double) -75.56475877761841);
+        c.setName("Royal Films Bosque Plaza");
+        c.setLatitude((double) 6.268674619223301);
+        c.setLongitude((double) -75.56475877761841);
         listaCinemas.add(c);
         cinemaList = listaCinemas;
         marcarCinemas();
@@ -177,8 +177,8 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
 
         for (int i = 0; i < cinemaList.size(); i++) {
             cine = cinemaList.get(i);
-            LatLngCine = new LatLng(cine.getLatitud(), cine.getLongitud());
-            d = distancia(myLat, myLng, cinemaList.get(i).getLatitud(), cinemaList.get(i).getLongitud());
+            LatLngCine = new LatLng(cine.getLatitude(), cine.getLongitude());
+            d = distancia(myLat, myLng, cinemaList.get(i).getLatitude(), cinemaList.get(i).getLongitude());
             if (d < 1) {
                 d = d * 1000;
                 unidad = " m";
@@ -187,7 +187,7 @@ public class MapaCinemasFragment extends Fragment implements OnMapReadyCallback,
             }
             mMap.addMarker(new MarkerOptions()
                     .position(LatLngCine)
-                    .title(cine.getNombre())
+                    .title(cine.getName())
                     .snippet(twoDForm.format(d) + unidad)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 

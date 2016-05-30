@@ -87,15 +87,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void setFragment(int fragmentId, Bundle parametros, boolean addStack) {
+    public void setFragment(int fragmentId, Bundle parameters, boolean addStack) {
         Fragment f = null;
         switch (fragmentId) {
             case FragmentListaPeliculas.ID:
                 f = FragmentListaPeliculas.newInstance();
                 break;
             case MovieFragment.ID:
-                parametros.getString(MovieFragment.ARG_ID_PELICULA);
-                f = MovieFragment.newInstance(parametros.getString(MovieFragment.ARG_ID_PELICULA));
+                parameters.getString(MovieFragment.ARG_ID_PELICULA);
+                f = MovieFragment.newInstance(parameters.getString(MovieFragment.ARG_ID_PELICULA));
                 break;
             case FragmentLogin.ID:
                 f = FragmentLogin.newInstance();

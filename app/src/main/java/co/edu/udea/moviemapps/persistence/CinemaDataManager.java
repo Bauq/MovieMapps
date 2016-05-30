@@ -47,18 +47,18 @@ public class CinemaDataManager extends DataManager {
     private synchronized  Cinema getCinemaFromCursor(Cursor cursor){
         Cinema cinema = new Cinema();
         cinema.setId(cursor.getInt(COL_ID));
-        cinema.setNombre(cursor.getString(COL_NOMBRE));
-        cinema.setLatitud(cursor.getDouble(COL_LATITUD));
-        cinema.setLongitud(cursor.getDouble(COL_LONGITUD));
+        cinema.setName(cursor.getString(COL_NOMBRE));
+        cinema.setLatitude(cursor.getDouble(COL_LATITUD));
+        cinema.setLongitude(cursor.getDouble(COL_LONGITUD));
         return cinema;
     }
 
     private synchronized ContentValues getContentValues(Cinema cinema){
         ContentValues cv = new ContentValues();
         cv.put(COLUMNS[COL_ID], cinema.getId());
-        cv.put(COLUMNS[COL_NOMBRE], cinema.getNombre());
-        cv.put(COLUMNS[COL_LATITUD], cinema.getLatitud());
-        cv.put(COLUMNS[COL_LONGITUD], cinema.getLongitud());
+        cv.put(COLUMNS[COL_NOMBRE], cinema.getName());
+        cv.put(COLUMNS[COL_LATITUD], cinema.getLatitude());
+        cv.put(COLUMNS[COL_LONGITUD], cinema.getLongitude());
         return cv;
     }
 

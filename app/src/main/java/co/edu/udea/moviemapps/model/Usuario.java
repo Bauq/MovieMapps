@@ -1,26 +1,23 @@
 package co.edu.udea.moviemapps.model;
 
-/**
- * Created by Samuel on 12/04/2016.
- */
 
 public class Usuario {
 
     private Long id;
-    private String nombre;
-    private String foto;
-    private String correo;
+    private String name;
+    private String photo;
+    private String email;
 
     public Usuario() {
         this.id = (long) 1;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setId(Long id) {
@@ -31,19 +28,19 @@ public class Usuario {
         return id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFoto() {
-        return foto;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

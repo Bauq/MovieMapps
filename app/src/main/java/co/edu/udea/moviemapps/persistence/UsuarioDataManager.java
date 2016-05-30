@@ -43,18 +43,18 @@ public class UsuarioDataManager extends DataManager {
     private synchronized Usuario getUsuarioFromCursor(Cursor cursor) {
         Usuario usuario = new Usuario();
         usuario.setId(cursor.getLong(COL_ID));
-        usuario.setNombre(cursor.getString(COL_NOMBRE));
-        usuario.setFoto(cursor.getString(COL_FOTO));
-        usuario.setCorreo(cursor.getString(COL_CORREO));
+        usuario.setName(cursor.getString(COL_NOMBRE));
+        usuario.setPhoto(cursor.getString(COL_FOTO));
+        usuario.setEmail(cursor.getString(COL_CORREO));
         return usuario;
     }
 
     private synchronized ContentValues getContentValues(Usuario usuario) {
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMNS[COL_NOMBRE], usuario.getNombre());
-        cv.put(COLUMNS[COL_FOTO], usuario.getFoto());
-        cv.put(COLUMNS[COL_CORREO], usuario.getCorreo());
+        cv.put(COLUMNS[COL_NOMBRE], usuario.getName());
+        cv.put(COLUMNS[COL_FOTO], usuario.getPhoto());
+        cv.put(COLUMNS[COL_CORREO], usuario.getEmail());
         cv.put(COLUMNS[COL_ID], 1);
 
         return cv;

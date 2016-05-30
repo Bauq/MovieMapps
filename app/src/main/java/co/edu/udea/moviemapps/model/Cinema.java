@@ -6,32 +6,32 @@ package co.edu.udea.moviemapps.model;
 public class Cinema {
 
     int id;
-    String nombre;
-    Double latitud, longitud;
+    String name;
+    Double latitude, longitude;
 
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Double getLatitud() {
-        return latitud;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLatitud(Double latitud) {
-        this.latitud = latitud;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public Double getLongitud() {
-        return longitud;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public void setId(int id) {

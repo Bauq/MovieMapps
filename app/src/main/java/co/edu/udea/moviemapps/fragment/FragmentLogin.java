@@ -70,19 +70,19 @@ public class FragmentLogin extends Fragment {
     private void mostrarUsuario(Profile currentProfile) {
         usuario = MovieMapps.getUsuario();
         if (usuario != null) {
-            cargarImagen.execute(usuario.getFoto());
-            nombreUsuario.setText(usuario.getNombre());
-            toast = Toast.makeText(MovieMapps.getContext(), usuario.getNombre(), Toast.LENGTH_LONG);
+            cargarImagen.execute(usuario.getPhoto());
+            nombreUsuario.setText(usuario.getName());
+            toast = Toast.makeText(MovieMapps.getContext(), usuario.getName(), Toast.LENGTH_LONG);
             toast.show();
         } else if (currentProfile != null) {
             usuario = new Usuario();
-            usuario.setNombre(currentProfile.getName());
+            usuario.setName(currentProfile.getName());
 
             Uri uriFotoPerfil = currentProfile.getProfilePictureUri(200, 200);
             cargarImagen.execute(uriFotoPerfil.toString());
-            usuario.setFoto(uriFotoPerfil.toString());
+            usuario.setPhoto(uriFotoPerfil.toString());
             actualizarUsuario(usuario);
-            toast = Toast.makeText(MovieMapps.getContext(), usuario.getNombre(), Toast.LENGTH_LONG);
+            toast = Toast.makeText(MovieMapps.getContext(), usuario.getName(), Toast.LENGTH_LONG);
             toast.show();
         }
 
@@ -123,7 +123,7 @@ public class FragmentLogin extends Fragment {
                                 try {
                                     usuario = MovieMapps.getUsuario();
                                     usuario.setId(Long.valueOf(object.getString("id")));
-                                    usuario.setCorreo(object.getString("email"));
+                                    usuario.setEmail(object.getString("email"));
                                     actualizarUsuario(usuario);
                                 } catch (JSONException e) {
                                     e.printStackTrace();

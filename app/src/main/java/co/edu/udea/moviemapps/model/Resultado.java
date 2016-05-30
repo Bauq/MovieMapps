@@ -21,9 +21,7 @@ import java.util.Map;
         "total_pages",
         "total_results"
 })
-/**
- * Created by SA on 12/04/2016.
- */
+
 public class Resultado {
 
     @JsonProperty("page")
@@ -37,57 +35,36 @@ public class Resultado {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    /**
-     * @return The page
-     */
     @JsonProperty("page")
     public Integer getPage() {
         return page;
     }
 
-    /**
-     * @return The results
-     */
     @JsonProperty("results")
     public List<Pelicula> getResults() {
         return results;
     }
 
-    /**
-     * @param results The results
-     */
     @JsonProperty("results")
     public void setResults(List<Pelicula> results) {
         this.results = results;
     }
 
-    /**
-     * @return The totalPages
-     */
     @JsonProperty("total_pages")
     public Integer getTotalPages() {
         return totalPages;
     }
 
-    /**
-     * @param totalPages The total_pages
-     */
     @JsonProperty("total_pages")
     public void setTotalPages(Integer totalPages) {
         this.totalPages = totalPages;
     }
 
-    /**
-     * @return The totalResults
-     */
     @JsonProperty("total_results")
     public Integer getTotalResults() {
         return totalResults;
     }
 
-    /**
-     * @param totalResults The total_results
-     */
     @JsonProperty("total_results")
     public void setTotalResults(Integer totalResults) {
         this.totalResults = totalResults;
