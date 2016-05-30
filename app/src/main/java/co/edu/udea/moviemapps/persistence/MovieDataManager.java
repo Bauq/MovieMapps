@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.junit.runner.RunWith;
+
 import co.edu.udea.moviemapps.activities.MovieMapps;
 import co.edu.udea.moviemapps.model.Movie;
 import co.edu.udea.moviemapps.persistence.config.DataManager;
@@ -91,11 +93,12 @@ public class MovieDataManager extends DataManager {
         return null;
     }
 
-    public void delete(Movie movie) {
+    public int delete(Movie movie) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.delete(TABLE_NAME, COLUMNS[COL_ID] + " = ?", new String[]{String.valueOf(movie.getId())});
+        int deletedItems = db.delete(TABLE_NAME, COLUMNS[COL_ID] + " = ?", new String[]{String.valueOf(movie.getId())});
         db.close();
         helper.close();
+        return deletedItems;
     }
 }
 
