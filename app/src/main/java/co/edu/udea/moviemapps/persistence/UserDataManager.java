@@ -40,7 +40,7 @@ public class UserDataManager extends DataManager {
 
     private synchronized User getUsuarioFromCursor(Cursor cursor) {
         User user = new User();
-        user.setId(cursor.getLong(COL_ID));
+        user.setId(cursor.getInt(COL_ID));
         user.setName(cursor.getString(COL_NAME));
         user.setPhoto(cursor.getString(COL_PHOTO));
         user.setEmail(cursor.getString(COL_EMAIL));
@@ -53,19 +53,19 @@ public class UserDataManager extends DataManager {
         contentValues.put(COLUMNS[COL_NAME], user.getName());
         contentValues.put(COLUMNS[COL_PHOTO], user.getPhoto());
         contentValues.put(COLUMNS[COL_EMAIL], user.getEmail());
-        contentValues.put(COLUMNS[COL_ID], 1);
+        contentValues.put(COLUMNS[COL_ID], user.getId());
 
         return contentValues;
     }
 
 
-    public synchronized long insert(User user) {
+    public synchronized int insert(User user) {
         SQLiteDatabase db = helper.getWritableDatabase();
         long idUser = db.insertOrThrow(TABLE_NAME, null, getContentValues(user));
         db.close();
         helper.close();
-        user.setId(idUser);
-        return idUser;
+        user.setId((int)idUser);
+        return (int) idUser;
     }
 
     public synchronized void update(User user) {
@@ -93,11 +93,12 @@ public class UserDataManager extends DataManager {
         return null;
     }
 
-    public void delete(User user) {
+    public int delete(User user) {
         SQLiteDatabase db = helper.getWritableDatabase();
-        db.delete(TABLE_NAME, COLUMNS[COL_ID] + " = ?", new String[]{String.valueOf(user.getId())});
+        int deletedItems = db.delete(TABLE_NAME, COLUMNS[COL_ID] + " = ?", new String[]{String.valueOf(user.getId())});
         db.close();
         helper.close();
+        return  deletedItems;
     }
 }
 

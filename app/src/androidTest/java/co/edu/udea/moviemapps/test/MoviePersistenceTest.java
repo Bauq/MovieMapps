@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 
-public class testJUnit {
+public class MoviePersistenceTest {
     MovieDataManager movieDataManager = MovieDataManager.getInstance();
     Movie inexistentMovie = new Movie();
     Movie existentMovie = new Movie();
@@ -22,7 +22,7 @@ public class testJUnit {
     String nameExistentMovie = "The Jungle Book";
     int idExistentMovie = 15462;
 
-    public testJUnit() {
+    public MoviePersistenceTest() {
     }
 
     @Before

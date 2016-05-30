@@ -113,7 +113,7 @@ public class Login extends Fragment {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 try {
                                     user = movieMapps.getUser();
-                                    user.setId(Long.valueOf(object.getString("id")));
+                                    user.setId(Integer.valueOf(object.getString("id")));
                                     user.setEmail(object.getString("email"));
                                     updateUser(user);
                                 } catch (JSONException e) {
