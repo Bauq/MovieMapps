@@ -1,4 +1,4 @@
-package moviemapps.co.edu.udea.moviemapps.test;
+package co.edu.udea.moviemapps.test;
 import org.junit.Test;
 
 import co.edu.udea.moviemapps.model.User;
