@@ -42,8 +42,4 @@ public class MovieMapps extends Application {
     public static Context getContext() {
         return context;
     }
-
-    public static void setContext(Context context) {
-        MovieMapps.context = context;
-    }
 }

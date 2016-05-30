@@ -7,10 +7,6 @@
             android:icon="@mipmap/cine"
             android:title="@string/cartelera" />
         <item
-            android:id="@+id/calificacion"
-            android:icon="@mipmap/calificacion"
-            android:title="@string/calificacion" />
-        <item
             android:id="@+id/armaPlan"
             android:icon="@mipmap/amigos"
             android:title="@string/armaPlan" />
@@ -19,18 +15,5 @@
             android:icon="@mipmap/map"
             android:title="@string/mapa" />
     </group>
-
-    <item android:title="@string/comunicate">
-        <menu>
-            <item
-                android:id="@+id/compartir"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/comparte" />
-            <item
-                android:id="@+id/acercade"
-                android:icon="@mipmap/about"
-                android:title="@string/acercade" />
-        </menu>
-    </item>
 
 </menu>

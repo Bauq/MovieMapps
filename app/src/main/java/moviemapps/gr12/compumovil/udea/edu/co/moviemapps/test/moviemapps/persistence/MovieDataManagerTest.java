@@ -13,8 +13,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.model.Pelicula;
 import moviemapps.gr12.compumovil.udea.edu.co.moviemapps.persistence.MovieDataManager;
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 7cd10143c0915c87513e0fbf6fe31ac143189667
 @RunWith(MockitoJUnitRunner.class)
 public class MovieDataManagerTest extends AndroidTestCase {
     MovieDataManager movieDataManager;
@@ -56,4 +59,10 @@ public class MovieDataManagerTest extends AndroidTestCase {
         Pelicula peliculaRetornada = movieDataManager.getMovieById(1);
         assertEquals(pelicula, peliculaRetornada);
 	}
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 7cd10143c0915c87513e0fbf6fe31ac143189667
 }
