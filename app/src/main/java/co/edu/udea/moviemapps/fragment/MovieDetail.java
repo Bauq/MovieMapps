@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,12 +90,8 @@ public class MovieDetail extends Fragment {
         AsyncTask<String, Void, Bitmap> asyncTask = new AsyncTask<String, Void, Bitmap>() {
 
             @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-            }
-
-            @Override
             protected Bitmap doInBackground(String... params) {
+                Log.d("PARAMS", "doInBackground: "+ params[0]);
                return MovieMappsUtils.getImage(params);
             }
 
