@@ -16,10 +16,10 @@ public class UserPersistenceTest {
     UserDataManager userDataManager = UserDataManager.getInstance();
     User existentUser = new User();
     User inexistentUser = new User();
-    int idInexistentUser = 25698;
+    long idInexistentUser = 25698;
     String emailInexistentUser = "saamuelarenas@hotmail.com";
     String emailExistentUser = "brian.uribe93@gmail.com";
-    int idExistentUser = 96854;
+    long idExistentUser = 96854;
 
     @Before
     public void setup() {
@@ -44,14 +44,14 @@ public class UserPersistenceTest {
     @Test
     public void insertNewUser() {
         inexistentUser.setId(idInexistentUser);
-        int idNew = userDataManager.insert(inexistentUser);
+        long idNew = userDataManager.insert(inexistentUser);
         assertEquals(idNew, inexistentUser.getId());
     }
 
     @Test(expected = SQLiteConstraintException.class)
     public void testInsertExistentUser() {
         existentUser.setId(idExistentUser);
-        int idNew = userDataManager.insert(existentUser);
+        long idNew = userDataManager.insert(existentUser);
         assertEquals(idNew, existentUser.getId());
     }
 

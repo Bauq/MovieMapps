@@ -3,7 +3,7 @@ package co.edu.udea.moviemapps.model;
 
 public class User {
 
-    private int id;
+    private long id;
     private String name;
     private String photo;
     private String email;
@@ -20,11 +20,11 @@ public class User {
         this.email = email;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

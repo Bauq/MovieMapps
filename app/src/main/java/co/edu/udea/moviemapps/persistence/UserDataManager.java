@@ -59,13 +59,13 @@ public class UserDataManager extends DataManager {
     }
 
 
-    public synchronized int insert(User user) {
+    public synchronized long insert(User user) {
         SQLiteDatabase db = helper.getWritableDatabase();
         long idUser = db.insertOrThrow(TABLE_NAME, null, getContentValues(user));
         db.close();
         helper.close();
-        user.setId((int)idUser);
-        return (int) idUser;
+        user.setId(idUser);
+        return idUser;
     }
 
     public synchronized void update(User user) {
@@ -79,7 +79,7 @@ public class UserDataManager extends DataManager {
         helper.close();
     }
 
-    public User getUserById(int e) {
+    public User getUserById(long e) {
         SQLiteDatabase db = helper.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, COLUMNS,
                 "id = ?", new String[]{String.valueOf(e)}, null, null, COLUMNS[COL_ID]);
