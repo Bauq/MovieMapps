@@ -136,9 +136,6 @@ public class Login extends Fragment {
                 }
             }
         };
-        if(user != null){
-            Log.e("Prueba user", user.getPhoto());
-        }
     }
 
     @Override
