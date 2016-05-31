@@ -41,7 +41,7 @@ public class MovieMappsUtils {
         double finalLongitude = finalPosition.longitude;
         double initialLatitude = initialPosition.latitude;
         double initialLongitude = initialPosition.longitude;
-        double earthRadius = 6371; //kilometers
+        double earthRadius = 6371;
         double latitudeDistance = Math.toRadians(finalLatitude - initialLatitude);
         double longitudeDistance = Math.toRadians(finalLongitude - initialLongitude);
 
@@ -50,7 +50,7 @@ public class MovieMappsUtils {
                         Math.sin(longitudeDistance / 2) * Math.sin(longitudeDistance / 2);
         distance = 2 * Math.atan2(Math.sqrt(distance), Math.sqrt(1 - distance));
         distance = earthRadius * distance;
-        return distance;
+        return distance; //kilometers
     }
 
 }

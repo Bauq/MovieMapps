@@ -1,4 +1,4 @@
-package co.edu.udea.moviemapps.test;
+package co.edu.udea.moviemapps.test.view;
 
 import android.graphics.Bitmap;
 
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 
-public class UtilPersistenceTest {
+public class MovieMappsUtilsTest {
 
     @Test
     public void getImageTest(){

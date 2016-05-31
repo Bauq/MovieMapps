@@ -37,20 +37,28 @@ import java.util.Arrays;
 
 import co.edu.udea.moviemapps.activities.MovieMapps;
 import co.edu.udea.moviemapps.R;
+import co.edu.udea.moviemapps.listener.OnFragmentInteractionListener;
+import co.edu.udea.moviemapps.model.ServiceResult;
 import co.edu.udea.moviemapps.model.User;
 import co.edu.udea.moviemapps.persistence.UserDataManager;
+import co.edu.udea.moviemapps.rest.MovieMappsService;
+import co.edu.udea.moviemapps.util.MovieMappsUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class Login extends Fragment {
     public static final int ID = 3;
     CallbackManager callbackManager;
     ProfileTracker profileTracker;
-    Toast toast;
     TextView userName;
     ImageView userProfilePicture;
     User user;
     LoginButton loginButton;
     MovieMapps movieMapps = new MovieMapps();
+
+    private OnFragmentInteractionListener listener;
 
     public static Login newInstance() {
         return new Login();
@@ -67,19 +75,6 @@ public class Login extends Fragment {
         return view;
     }
 
-    private void showUser(Profile currentProfile) {
-     if (currentProfile != null) {
-            user = new User();
-            user.setName(currentProfile.getName());
-            Uri profilePictureUri = currentProfile.getProfilePictureUri(200, 200);
-            downloadImage.execute(profilePictureUri.toString());
-            user.setPhoto(profilePictureUri.toString());
-            updateUser(user);
-            userName.setText(user.getName());
-            loginButton.setVisibility(View.INVISIBLE);
-        }
-    }
-
     private void updateUser(User user) {
         this.user = user;
         movieMapps.setUser(user);
@@ -89,11 +84,16 @@ public class Login extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        listener = (OnFragmentInteractionListener) getActivity();
         FacebookSdk.sdkInitialize(MovieMapps.getContext());
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
         userName = (TextView) view.findViewById(R.id.name);
         userProfilePicture = (ImageView) view.findViewById(R.id.image);
+
+        userName.setVisibility(View.GONE);
+        userProfilePicture.setVisibility(View.GONE);
+
         loginButton.setReadPermissions(Arrays.asList(
                 "public_profile", "email", "user_birthday", "user_friends"));
         loginButton.setFragment(this);
@@ -101,8 +101,7 @@ public class Login extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
@@ -132,14 +131,15 @@ public class Login extends Fragment {
                 Log.i("login", exception.getMessage());
             }
         });
-        loginButton.setVisibility(View.VISIBLE);
+
         profileTracker = new ProfileTracker() {
             @Override
-            protected void onCurrentProfileChanged(
-                    Profile oldProfile,
-                    Profile currentProfile) {
-                showUser(oldProfile);
-                showUser(currentProfile);
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                if(oldProfile != null){
+                    listener.setFragment(Movies.ID, null, false);
+                }else{
+                    showUser(currentProfile);
+                }
             }
         };
     }
@@ -150,29 +150,45 @@ public class Login extends Fragment {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    AsyncTask<String, Void, Bitmap> downloadImage = new AsyncTask<String, Void, Bitmap>() {
-        @Override
-        protected Bitmap doInBackground(String... params) {
+    private void showUser(Profile currentProfile) {
+        if (currentProfile != null) {
+            userName.setVisibility(View.VISIBLE);
+            userProfilePicture.setVisibility(View.VISIBLE);
+            user = new User();
+            user.setName(currentProfile.getName());
+            Uri profilePictureUri = currentProfile.getProfilePictureUri(400, 400);
+            downloadImage(profilePictureUri.toString());
+            user.setPhoto(profilePictureUri.toString());
+            updateUser(user);
+            userName.setText(user.getName());
+        }
+    }
 
-            URL imageUrl;
-            Bitmap image = null;
-            try {
-                imageUrl = new URL(params[0]);
-                HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
-                conn.connect();
-                image = BitmapFactory.decodeStream(conn.getInputStream());
-            } catch (IOException e) {
-                Log.e("ERROR", "Load image failed at doInBackground: ", e);
-                e.printStackTrace();
+    private void downloadImage(String url) {
+        AsyncTask<String, Void, Bitmap> asyncTask = new AsyncTask<String, Void, Bitmap>() {
+
+            @Override
+            protected Bitmap doInBackground(String... params) {
+                URL imageUrl;
+                Bitmap image = null;
+                try {
+                    imageUrl = new URL(params[0]);
+                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
+                    conn.connect();
+                    image = BitmapFactory.decodeStream(conn.getInputStream());
+                } catch (IOException e) {
+                    Log.e("ERROR", "Load image failed at doInBackground: ", e);
+                    e.printStackTrace();
+                }
+                return image;
             }
-            return image;
-        }
 
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-            userProfilePicture.setImageBitmap(bitmap);
-            this.cancel(true);
-        }
-    };
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                super.onPostExecute(bitmap);
+                userProfilePicture.setImageBitmap(bitmap);
+            }
+        };
+        asyncTask.execute(url);
+    }
 }

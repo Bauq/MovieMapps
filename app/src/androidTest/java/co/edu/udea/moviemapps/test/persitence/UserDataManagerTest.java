@@ -1,4 +1,4 @@
-package co.edu.udea.moviemapps.test;
+package co.edu.udea.moviemapps.test.persitence;
 
 import android.database.sqlite.SQLiteConstraintException;
 
@@ -11,7 +11,7 @@ import co.edu.udea.moviemapps.persistence.UserDataManager;
 
 import static org.junit.Assert.*;
 
-public class UserPersistenceTest {
+public class UserDataManagerTest {
 
     UserDataManager userDataManager = UserDataManager.getInstance();
     User existentUser = new User();

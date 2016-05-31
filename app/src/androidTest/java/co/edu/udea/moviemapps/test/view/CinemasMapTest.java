@@ -1,4 +1,4 @@
-package co.edu.udea.moviemapps.test;
+package co.edu.udea.moviemapps.test.view;
 
 import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
@@ -9,9 +9,7 @@ import com.robotium.solo.Solo;
 import com.robotium.solo.Timeout;
 
 
-
-@SuppressWarnings("rawtypes")
-public class MapTest extends ActivityInstrumentationTestCase2 {
+public class CinemasMapTest extends ActivityInstrumentationTestCase2 {
   	private Solo solo;
   	
   	private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "co.edu.udea.moviemapps.activities.MainActivity";
@@ -26,7 +24,7 @@ public class MapTest extends ActivityInstrumentationTestCase2 {
     }
   	
   	@SuppressWarnings("unchecked")
-    public MapTest() throws ClassNotFoundException {
+    public CinemasMapTest() throws ClassNotFoundException {
         super(launcherActivityClass);
     }
 
@@ -46,7 +44,7 @@ public class MapTest extends ActivityInstrumentationTestCase2 {
 		solo.waitForActivity("MainActivity", 2000);
 		solo.clickOnView(solo.getView(android.widget.ImageButton.class, 0));
 		solo.clickInRecyclerView(3, 1);
-		Timeout.setSmallTimeout(15721);
+		Timeout.setSmallTimeout(16000);
 		UiDevice device = UiDevice.getInstance(getInstrumentation());
 		UiObject marker = device.findObject(new UiSelector().descriptionContains("Google Map"));
 		assertEquals(true,marker.click());

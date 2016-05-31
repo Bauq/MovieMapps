@@ -1,4 +1,4 @@
-package co.edu.udea.moviemapps.test;
+package co.edu.udea.moviemapps.test.view;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.util.Log;
@@ -20,7 +20,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 
 @SuppressWarnings("rawtypes")
-public class detailRobotium extends ActivityInstrumentationTestCase2 {
+public class MovieDetailTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     private static final String LAUNCHER_ACTIVITY_FULL_CLASSNAME = "co.edu.udea.moviemapps.activities.MainActivity";
@@ -36,7 +36,7 @@ public class detailRobotium extends ActivityInstrumentationTestCase2 {
     }
 
     @SuppressWarnings("unchecked")
-    public detailRobotium() throws ClassNotFoundException {
+    public MovieDetailTest() throws ClassNotFoundException {
         super(launcherActivityClass);
     }
 
@@ -75,9 +75,8 @@ public class detailRobotium extends ActivityInstrumentationTestCase2 {
         solo.scrollDown();
         solo.scrollDown();
         solo.scrollDown();
-        ArrayList<TextView> recycler = solo.clickInRecyclerView(4, 0);
+        ArrayList<TextView> recycler = solo.clickInRecyclerView(5, 0);
         String titleSelect = recycler.get(0).getText().toString();
-        Log.d("TITLE", "Title: " + titleSelect);
         Assert.assertTrue(solo.searchText(titleSelect));
     }
 

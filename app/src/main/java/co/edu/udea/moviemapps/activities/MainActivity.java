@@ -23,8 +23,6 @@ import co.edu.udea.moviemapps.listener.OnFragmentInteractionListener;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener {
-    public MainActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +59,6 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         switch (id){
@@ -84,6 +81,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void setFragment(int fragmentId, Bundle parameters, boolean addStack) {
         Fragment f = null;
+
         switch (fragmentId) {
             case Movies.ID:
                 f = Movies.newInstance();

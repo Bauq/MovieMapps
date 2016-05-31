@@ -14,14 +14,13 @@ import co.edu.udea.moviemapps.model.Movie;
 import co.edu.udea.moviemapps.persistence.MovieDataManager;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MovieDataManagerTest extends AndroidTestCase {
+public class MovieDataManagerUnitTest extends AndroidTestCase {
     MovieDataManager movieDataManager;
     Movie movie;
 
     @Before
     public void setUp() {
         movieDataManager = Mockito.mock(MovieDataManager.class);
-
         movie = new Movie();
         movie.setId(1);
         movie.setTitle("Civil war");

@@ -1,14 +1,11 @@
-package co.edu.udea.moviemapps.test.persistence;
+package co.edu.udea.moviemapps.test.persitence;
 
 import android.database.sqlite.SQLiteConstraintException;
-import android.test.AndroidTestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-
-import co.edu.udea.moviemapps.activities.MainActivity;
 import co.edu.udea.moviemapps.model.Movie;
 import co.edu.udea.moviemapps.persistence.MovieDataManager;
 
@@ -16,8 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 
-public class testJUnit {
-
+public class MovieDataManagerTest {
     MovieDataManager movieDataManager = MovieDataManager.getInstance();
     Movie inexistentMovie = new Movie();
     Movie existentMovie = new Movie();
@@ -26,7 +22,7 @@ public class testJUnit {
     String nameExistentMovie = "The Jungle Book";
     int idExistentMovie = 15462;
 
-    public testJUnit() {
+    public MovieDataManagerTest() {
     }
 
     @Before

@@ -41,7 +41,6 @@ public class CinemasMap extends Fragment implements OnMapReadyCallback, Location
 
     public static final int ID = 8;
 
-    private static final int FAST_GPS_UPDATE = 3000;
     private static final int SLOW_GPS_UPDATE = 30000;
     private static final int MIN_DISTANCE_GPS_UPDATES = 0;
     private static float zoom = (float) 15.5;
@@ -82,7 +81,6 @@ public class CinemasMap extends Fragment implements OnMapReadyCallback, Location
         mapFragment.getMapAsync(this);
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Map = googleMap;
@@ -90,7 +88,6 @@ public class CinemasMap extends Fragment implements OnMapReadyCallback, Location
         Map.setOnMyLocationButtonClickListener(this);
         getPosition();
     }
-
 
     @Override
     public void onLocationChanged(Location location) {
