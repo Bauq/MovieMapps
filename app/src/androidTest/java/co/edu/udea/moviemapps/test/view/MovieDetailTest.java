@@ -44,6 +44,7 @@ public class MovieDetailTest extends ActivityInstrumentationTestCase2 {
         super.setUp();
         solo = new Solo(getInstrumentation());
         getActivity();
+        solo.unlockScreen();
     }
 
     @Override
@@ -54,29 +55,31 @@ public class MovieDetailTest extends ActivityInstrumentationTestCase2 {
 
     public void testThirdElement() {
         solo.waitForActivity("MainActivity", 2000);
-        Timeout.setSmallTimeout(16789);
         ArrayList<TextView> recicler = solo.clickInRecyclerView(2, 0);
         String titleSelect = recicler.get(0).getText().toString();
+        solo.waitForText(titleSelect);
         Assert.assertTrue(solo.searchText(titleSelect));
     }
 
     public void testFirstElement() {
         solo.waitForActivity("MainActivity", 2000);
-        Timeout.setSmallTimeout(16789);
+        solo.unlockScreen();
         ArrayList<TextView> recicler = solo.clickInRecyclerView(0, 0);
         String titleSelect = recicler.get(0).getText().toString();
+        solo.waitForText(titleSelect);
         Assert.assertTrue(solo.searchText(titleSelect));
     }
 
     public void testLastElement() {
         solo.waitForActivity("MainActivity", 2000);
-        Timeout.setSmallTimeout(20000);
+        //Timeout.setSmallTimeout(20000);
         solo.scrollDown();
         solo.scrollDown();
         solo.scrollDown();
         solo.scrollDown();
         ArrayList<TextView> recycler = solo.clickInRecyclerView(5, 0);
         String titleSelect = recycler.get(0).getText().toString();
+        solo.waitForText(titleSelect);
         Assert.assertTrue(solo.searchText(titleSelect));
     }
 

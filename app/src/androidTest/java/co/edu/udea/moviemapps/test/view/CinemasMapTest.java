@@ -8,6 +8,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import com.robotium.solo.Solo;
 import com.robotium.solo.Timeout;
 
+import co.edu.udea.moviemapps.R;
+
 
 public class CinemasMapTest extends ActivityInstrumentationTestCase2 {
   	private Solo solo;
@@ -46,6 +48,7 @@ public class CinemasMapTest extends ActivityInstrumentationTestCase2 {
 		solo.clickInRecyclerView(3, 1);
 		Timeout.setSmallTimeout(16000);
 		UiDevice device = UiDevice.getInstance(getInstrumentation());
+		solo.waitForFragmentById(R.id.map);
 		UiObject marker = device.findObject(new UiSelector().descriptionContains("Google Map"));
 		assertEquals(true,marker.click());
 	}

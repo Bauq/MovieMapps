@@ -54,9 +54,9 @@ public class Login extends Fragment {
     ProfileTracker profileTracker;
     TextView userName;
     ImageView userProfilePicture;
-    User user;
     LoginButton loginButton;
     MovieMapps movieMapps = new MovieMapps();
+    User user = movieMapps.getUser();;
 
     private OnFragmentInteractionListener listener;
 
@@ -73,12 +73,6 @@ public class Login extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.login_fragment, container, false);
         return view;
-    }
-
-    private void updateUser(User user) {
-        this.user = user;
-        movieMapps.setUser(user);
-        UserDataManager.getInstance().update(this.user);
     }
 
     @Override
@@ -142,6 +136,9 @@ public class Login extends Fragment {
                 }
             }
         };
+        if(user != null){
+            Log.e("Prueba user", user.getPhoto());
+        }
     }
 
     @Override
@@ -154,14 +151,20 @@ public class Login extends Fragment {
         if (currentProfile != null) {
             userName.setVisibility(View.VISIBLE);
             userProfilePicture.setVisibility(View.VISIBLE);
-            user = new User();
-            user.setName(currentProfile.getName());
             Uri profilePictureUri = currentProfile.getProfilePictureUri(400, 400);
             downloadImage(profilePictureUri.toString());
+            user = new User();
+            user.setName(currentProfile.getName());
             user.setPhoto(profilePictureUri.toString());
             updateUser(user);
             userName.setText(user.getName());
         }
+    }
+
+    private void updateUser(User user) {
+        this.user = user;
+        movieMapps.setUser(user);
+        UserDataManager.getInstance().update(this.user);
     }
 
     private void downloadImage(String url) {
