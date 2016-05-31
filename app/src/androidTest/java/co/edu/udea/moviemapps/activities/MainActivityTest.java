@@ -55,19 +55,20 @@ public class MainActivityTest {
 
     @Test
     public void testGenerated() {
-        // Used to provide time delays between actions, see details at http://droidtestlab.com/delay.html
-        IdlingResource idlingResource;
 
-        idlingResource = startTiming(20900);
-        // Click at CardView with child index 4 of parent with id R.id.movies_list
-        onView(withId(R.id.movies_list)).perform(scrollToPosition(4));
-        onView(nthChildOf(withId(R.id.movies_list), 4)).perform(click());
-        stopTiming(idlingResource);
+        // Click at ImageButton with child index 1 of parent with id R.id.toolbar
+        onView(nthChildOf(withId(R.id.toolbar), 1)).perform(click());
 
-        idlingResource = startTiming(2900);
-        // Swipe up at ScrollView with child index 0 of parent with id R.id.content_main
-        onView(nthChildOf(withId(R.id.content_main),1)).perform(swipeUp());
-        stopTiming(idlingResource);
+        // Click at NavigationMenuItemView with child index 3 of parent with id R.id.design_navigation_view
+        onView(withId(R.id.design_navigation_view)).perform(scrollToPosition(3));
+        onView(nthChildOf(withId(R.id.design_navigation_view), 3)).perform(click());
+
+        // Click at ImageButton with child index 1 of parent with id R.id.toolbar
+        onView(nthChildOf(withId(R.id.toolbar), 1)).perform(click());
+
+        // Click at NavigationMenuItemView with child index 1 of parent with id R.id.design_navigation_view
+        onView(withId(R.id.design_navigation_view)).perform(scrollToPosition(1));
+        onView(nthChildOf(withId(R.id.design_navigation_view), 1)).perform(click());
 
     }
 
@@ -107,47 +108,5 @@ public class MainActivityTest {
                 ((android.support.v7.widget.RecyclerView) view).scrollToPosition(pos);
             }
         };
-    }
-
-    // See details at http://droidtestlab.com/delay.html
-    public IdlingResource startTiming(long time) {
-        IdlingResource idlingResource = new ElapsedTimeIdlingResource(time);
-        Espresso.registerIdlingResources(idlingResource);
-        return idlingResource;
-    }
-
-    public void stopTiming(IdlingResource idlingResource) {
-        Espresso.unregisterIdlingResources(idlingResource);
-    }
-
-    public class ElapsedTimeIdlingResource implements IdlingResource {
-        private long startTime;
-        private final long waitingTime;
-        private ResourceCallback resourceCallback;
-
-        public ElapsedTimeIdlingResource(long waitingTime) {
-            this.startTime = System.currentTimeMillis();
-            this.waitingTime = waitingTime;
-        }
-
-        @Override
-        public String getName() {
-            return ElapsedTimeIdlingResource.class.getName() + ":" + waitingTime;
-        }
-
-        @Override
-        public boolean isIdleNow() {
-            long elapsed = System.currentTimeMillis() - startTime;
-            boolean idle = (elapsed >= waitingTime);
-            if (idle) {
-                resourceCallback.onTransitionToIdle();
-            }
-            return idle;
-        }
-
-        @Override
-        public void registerIdleTransitionCallback(ResourceCallback resourceCallback) {
-            this.resourceCallback = resourceCallback;
-        }
     }
 }

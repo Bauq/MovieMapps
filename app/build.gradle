@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -32,7 +33,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {testCoverageEnabled = true}
+        debug { testCoverageEnabled = true }
     }
 }
 
@@ -74,4 +75,7 @@ dependencies {
     testCompile "org.robolectric:robolectric:3.0"
     compile 'org.mockito:mockito-core:1.9.5'
     compile 'org.robolectric:robolectric:3.0'
+    androidTestCompile 'com.android.support.test:runner:0.2'
+    androidTestCompile 'com.android.support.test:rules:0.2'
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
 }
