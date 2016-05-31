@@ -80,6 +80,7 @@ public class Login extends Fragment {
             downloadImage.execute(profilePictureUri.toString());
             user.setPhoto(profilePictureUri.toString());
             updateUser(user);
+            userName.setText(user.getName());
             toast = Toast.makeText(MovieMapps.getContext(), user.getName(), Toast.LENGTH_LONG);
             toast.show();
         }
