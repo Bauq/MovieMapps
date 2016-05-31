@@ -71,12 +71,10 @@ public class detailRobotium extends ActivityInstrumentationTestCase2 {
     public void testLastElement() {
         solo.waitForActivity("MainActivity", 2000);
         Timeout.setSmallTimeout(20000);
-
         solo.scrollDown();
         solo.scrollDown();
         solo.scrollDown();
         solo.scrollDown();
-
         ArrayList<TextView> recycler = solo.clickInRecyclerView(4, 0);
         String titleSelect = recycler.get(0).getText().toString();
         Log.d("TITLE", "Title: " + titleSelect);

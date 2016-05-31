@@ -49,6 +49,7 @@ public class Login extends Fragment {
     TextView userName;
     ImageView userProfilePicture;
     User user;
+    LoginButton loginButton;
     MovieMapps movieMapps = new MovieMapps();
 
     public static Login newInstance() {
@@ -67,13 +68,7 @@ public class Login extends Fragment {
     }
 
     private void showUser(Profile currentProfile) {
-        user = movieMapps.getUser();
-        if (user != null) {
-            downloadImage.execute(user.getPhoto());
-            userName.setText(user.getName());
-            toast = Toast.makeText(MovieMapps.getContext(), user.getName(), Toast.LENGTH_LONG);
-            toast.show();
-        } else if (currentProfile != null) {
+     if (currentProfile != null) {
             user = new User();
             user.setName(currentProfile.getName());
             Uri profilePictureUri = currentProfile.getProfilePictureUri(200, 200);
@@ -81,8 +76,7 @@ public class Login extends Fragment {
             user.setPhoto(profilePictureUri.toString());
             updateUser(user);
             userName.setText(user.getName());
-            toast = Toast.makeText(MovieMapps.getContext(), user.getName(), Toast.LENGTH_LONG);
-            toast.show();
+            loginButton.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -97,7 +91,7 @@ public class Login extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         FacebookSdk.sdkInitialize(MovieMapps.getContext());
         callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) view.findViewById(R.id.login_button);
+        loginButton = (LoginButton) view.findViewById(R.id.login_button);
         userName = (TextView) view.findViewById(R.id.name);
         userProfilePicture = (ImageView) view.findViewById(R.id.image);
         loginButton.setReadPermissions(Arrays.asList(
@@ -138,6 +132,7 @@ public class Login extends Fragment {
                 Log.i("login", exception.getMessage());
             }
         });
+        loginButton.setVisibility(View.VISIBLE);
         profileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(

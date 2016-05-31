@@ -38,7 +38,7 @@ public class testRobotium extends ActivityInstrumentationTestCase2 {
         super.tearDown();
   	}
   
-	public void testRun() {
+	public void testNearbyCinemas() {
         //Wait for activity: 'co.edu.udea.moviemapps.activities.MainActivity'
 		solo.waitForActivity("MainActivity", 2000);
         //Click on ImageView
@@ -69,21 +69,15 @@ public class testRobotium extends ActivityInstrumentationTestCase2 {
 		solo.clickOnView(solo.getView(android.view.TextureView.class, 0));
         //Click on android.view.TextureView
 		solo.clickOnView(solo.getView(android.view.TextureView.class, 0));
-        //Set default small timeout to 22170 milliseconds
-		Timeout.setSmallTimeout(22170);
-        //Click on ImageView
+        //Set default small timeout to 22170 millisecond
+	}
+
+	public void testShow(){
+		//Click on ImageView
 		solo.clickOnView(solo.getView(android.widget.ImageButton.class, 0));
-        //Click on Showtimes FrameLayout
-		solo.clickInRecyclerView(1, 0);
-        //Click on High-Rise 2016-05-13
-		solo.clickInRecyclerView(5, 0);
-        //Press menu back key
-		solo.goBack();
-        //Click on ImageView
-		solo.clickOnView(solo.getView(android.widget.ImageButton.class, 0));
-        //Click on Movies with your friends FrameLayout
+		//Click on Movies with your friends FrameLayout
 		solo.clickInRecyclerView(2, 0);
-        //Click on Iniciar sesión con Facebook
+		//Click on Iniciar sesión con Facebook
 		solo.clickOnView(solo.getView("login_button"));
 	}
 }

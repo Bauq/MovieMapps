@@ -12,7 +12,7 @@ public class MovieMapps extends Application {
     private static User user;
 
     public User getUser() {
-        return user == null ? UserDataManager.getInstance().getUserById(1) : user;
+        return user == null ? new User() : user;
     }
 
     public void setUser(User user) {
