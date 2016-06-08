@@ -1,15 +1,20 @@
 package co.edu.udea.moviemapps.model;
 
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
 
     private long id;
+    @SerializedName("nombre")
     private String name;
+    @SerializedName("foto")
     private String photo;
+    @SerializedName("correo")
     private String email;
 
     public User() {
-        this.id =  1;
+
     }
 
     public String getEmail() {

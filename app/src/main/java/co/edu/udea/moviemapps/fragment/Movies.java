@@ -19,7 +19,7 @@ import co.edu.udea.moviemapps.listener.OnItemMovieListener;
 import co.edu.udea.moviemapps.adapters.MovieAdapter;
 import co.edu.udea.moviemapps.R;
 import co.edu.udea.moviemapps.model.Movie;
-import co.edu.udea.moviemapps.rest.MovieMappsService;
+import co.edu.udea.moviemapps.rest.MovieDBService;
 import co.edu.udea.moviemapps.model.ServiceResult;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,7 +69,7 @@ public class Movies extends Fragment implements OnItemMovieListener {
 
         @Override
         protected Response doInBackground(Void... params) {
-            Call<ServiceResult> result = MovieMappsService.getInstance().top_peliculas(moviesApiKey);
+            Call<ServiceResult> result = MovieDBService.getInstance().top_peliculas(moviesApiKey);
             result.enqueue(new Callback<ServiceResult>() {
                 @Override
                 public void onResponse(Call<ServiceResult> call, Response<ServiceResult> response) {

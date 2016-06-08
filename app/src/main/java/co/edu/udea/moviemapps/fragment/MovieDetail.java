@@ -8,11 +8,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import co.edu.udea.moviemapps.R;
+import co.edu.udea.moviemapps.activities.MovieMapps;
+import co.edu.udea.moviemapps.model.Classification;
 import co.edu.udea.moviemapps.model.Movie;
+import co.edu.udea.moviemapps.model.ServiceResult;
+import co.edu.udea.moviemapps.persistence.ClassificationDataManager;
+import co.edu.udea.moviemapps.rest.MovieDBService;
 import co.edu.udea.moviemapps.rest.MovieMappsService;
 import co.edu.udea.moviemapps.util.MovieMappsUtils;
 import retrofit2.Call;
@@ -20,12 +28,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MovieDetail extends Fragment {
+public class MovieDetail extends Fragment implements View.OnClickListener {
     public static final int ID = 2;
     public static final String MOVIE_ARG_ID = "movieId";
     public String apiKey = "d4aadc42b63f7a1565bffa6dd41f1bfc";
-
+    public Classification classification;
     public ImageView moviePoster;
+    public ImageButton like, dislike;
     public TextView movieTitle, movieOverview;
     private String movieId;
 
@@ -55,7 +64,31 @@ public class MovieDetail extends Fragment {
         moviePoster = (ImageView) view.findViewById(R.id.poster);
         movieOverview = (TextView) view.findViewById(R.id.overview);
         movieTitle = (TextView) view.findViewById(R.id.movie_title);
+        like  = (ImageButton) view.findViewById(R.id.like);
+        dislike = (ImageButton) view.findViewById(R.id.dislike);
+        like.setOnClickListener(this);
+        dislike.setOnClickListener(this);
         new DownloadMovie().execute();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.like:
+                classification = new Classification();
+                classification.setIdMovie(Integer.valueOf(movieId));
+                classification.setIdUsuario(MovieMapps.getUser().getId());
+                classification.setValor(Integer.parseInt("1"));
+                ClassificationDataManager.getInstance().saveClassification(classification);
+                break;
+            case R.id.dislike:
+                classification = new Classification();
+                classification.setIdMovie(Integer.valueOf(movieId));
+                classification.setIdUsuario(MovieMapps.getUser().getId());
+                classification.setValor(Integer.parseInt("2"));
+                ClassificationDataManager.getInstance().saveClassification(classification);
+                break;
+        }
     }
 
     private class DownloadMovie extends AsyncTask<Void, Void, Response> {
@@ -63,7 +96,7 @@ public class MovieDetail extends Fragment {
         @Override
         protected Response doInBackground(Void... params) {
             Response response = null;
-            Call<Movie> results = MovieMappsService.getInstance().movieById(movieId, apiKey);
+            Call<Movie> results = MovieDBService.getInstance().movieById(movieId, apiKey);
             results.enqueue(new Callback<Movie>() {
                 @Override
                 public void onResponse(Call<Movie> call, Response<Movie> response) {
@@ -104,3 +137,4 @@ public class MovieDetail extends Fragment {
         asyncTask.execute(url);
     }
 }
+

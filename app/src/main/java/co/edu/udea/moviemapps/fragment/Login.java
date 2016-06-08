@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -38,14 +37,8 @@ import java.util.Arrays;
 import co.edu.udea.moviemapps.activities.MovieMapps;
 import co.edu.udea.moviemapps.R;
 import co.edu.udea.moviemapps.listener.OnFragmentInteractionListener;
-import co.edu.udea.moviemapps.model.ServiceResult;
 import co.edu.udea.moviemapps.model.User;
 import co.edu.udea.moviemapps.persistence.UserDataManager;
-import co.edu.udea.moviemapps.rest.MovieMappsService;
-import co.edu.udea.moviemapps.util.MovieMappsUtils;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class Login extends Fragment {
@@ -103,6 +96,7 @@ public class Login extends Fragment {
                                     user = movieMapps.getUser();
                                     user.setId(Long.valueOf(object.getString("id")));
                                     user.setEmail(object.getString("email"));
+                                    UserDataManager.getInstance().insert(user);
                                     updateUser(user);
                                 } catch (JSONException e) {
                                     Log.e("ERROR", "JSON parse failed at onCompleted: ", e);

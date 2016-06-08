@@ -20,6 +20,7 @@ import co.edu.udea.moviemapps.fragment.Login;
 import co.edu.udea.moviemapps.fragment.CinemasMap;
 import co.edu.udea.moviemapps.fragment.MovieDetail;
 import co.edu.udea.moviemapps.listener.OnFragmentInteractionListener;
+import co.edu.udea.moviemapps.persistence.UserDataManager;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnFragmentInteractionListener {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
+        MovieMapps.setUser(UserDataManager.getInstance().getUser());
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 

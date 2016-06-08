@@ -1,21 +1,18 @@
 package co.edu.udea.moviemapps.rest;
 
 
-import co.edu.udea.moviemapps.model.Movie;
+import co.edu.udea.moviemapps.model.Classification;
 import co.edu.udea.moviemapps.model.ServiceResult;
+import co.edu.udea.moviemapps.model.User;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.Body;
+import retrofit2.http.POST;
 
 
 public interface MovieMappsServiceI {
 
-    @GET("movie/now_playing")
-    Call<ServiceResult> top_peliculas(@Query("api_key") String apiKey);
-
-    @GET("movie/{id}")
-    Call<Movie> movieById(@Path("id") String id,
-                          @Query("api_key") String apiKey);
-
+    @POST("api/Calificacions")
+    Call<ServiceResult> saveClassification(@Body Classification classification);
+    @POST("api/Usuarios")
+    Call<ServiceResult> saveUser(@Body User user);
 }

@@ -7,7 +7,7 @@ CREATE TABLE movie(
 );
 
 CREATE TABLE user(
-    id INTEGER PRIMARY KEY,
+    id BIGINT PRIMARY KEY,
     name TEXT,
     photo TEXT,
     email TEXT

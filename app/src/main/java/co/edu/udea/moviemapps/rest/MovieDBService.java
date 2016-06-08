@@ -11,12 +11,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class MovieMappsService {
+public class MovieDBService {
 
-    public static final String BASE_URL = "http://moviemappssw-samsax.c9users.io:8080/";
-    private static MovieMappsServiceI instance;
+    public static final String BASE_URL = "https://api.themoviedb.org/3/";
+    private static MovieDBServiceI instance;
 
-    public static MovieMappsServiceI getInstance() {
+    public static MovieDBServiceI getInstance() {
         if (instance == null) {
             Interceptor requestInterceptor = new Interceptor() {
                 @Override
@@ -34,7 +34,7 @@ public class MovieMappsService {
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build();
-            instance = retrofit.create(MovieMappsServiceI.class);
+            instance = retrofit.create(MovieDBServiceI.class);
         }
         return instance;
     }

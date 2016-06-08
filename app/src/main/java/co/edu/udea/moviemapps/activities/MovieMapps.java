@@ -11,12 +11,12 @@ public class MovieMapps extends Application {
     private static Context context;
     private static User user;
 
-    public User getUser() {
+    public static User getUser() {
         return user == null ? new User() : user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public static void setUser(User newUser) {
+        user = newUser;
     }
 
     @Override

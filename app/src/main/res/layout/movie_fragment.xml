@@ -19,6 +19,32 @@
             android:layout_gravity="center"
             android:layout_marginTop="-5dp" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-100dp"
+            android:layout_marginBottom="50dp">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/dislike"
+                android:padding="50dp"
+                android:id="@+id/dislike"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="50dp"
+                android:background="@mipmap/like"
+                android:id="@+id/like"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/movie_title"
             android:layout_width="wrap_content"
