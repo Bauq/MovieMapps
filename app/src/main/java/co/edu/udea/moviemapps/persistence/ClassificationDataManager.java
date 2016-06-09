@@ -24,9 +24,8 @@ public class ClassificationDataManager {
             @Override
             public void onResponse(Call<ServiceResult> call, Response<ServiceResult> response) {
                 Call callResponse = call;
-                Response callresponse = response;
-
-                Log.i("Calificar","respuesta");
+                Response responseService = response;
+                Log.i("Calificar",responseService.message());
             }
 
 

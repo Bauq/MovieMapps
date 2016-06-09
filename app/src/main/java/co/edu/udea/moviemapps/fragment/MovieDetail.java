@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
+import java.util.List;
 
 import co.edu.udea.moviemapps.R;
 import co.edu.udea.moviemapps.activities.MovieMapps;
@@ -33,6 +33,7 @@ public class MovieDetail extends Fragment implements View.OnClickListener {
     public static final String MOVIE_ARG_ID = "movieId";
     public String apiKey = "d4aadc42b63f7a1565bffa6dd41f1bfc";
     public Classification classification;
+    public List<Classification> classifications;
     public ImageView moviePoster;
     public ImageButton like, dislike;
     public TextView movieTitle, movieOverview;
@@ -91,6 +92,12 @@ public class MovieDetail extends Fragment implements View.OnClickListener {
         }
     }
 
+    public void setClassification(ServiceResult classification) {
+        if(classification != null) {
+            this.classifications = (List<Classification>) classification;
+        }
+    }
+
     private class DownloadMovie extends AsyncTask<Void, Void, Response> {
 
         @Override
@@ -115,6 +122,7 @@ public class MovieDetail extends Fragment implements View.OnClickListener {
         if (movie != null) {
             movieTitle.setText(movie.getTitle());
             movieOverview.setText(movie.getOverview());
+            DownloadClassification(String.valueOf(movie.getId()));
             downloadImage(moviePoster, movie.getPosterPath());
         }
     }
@@ -135,6 +143,27 @@ public class MovieDetail extends Fragment implements View.OnClickListener {
             }
         };
         asyncTask.execute(url);
+    }
+
+    private void DownloadClassification (final String idMovie) {
+        AsyncTask<String, Void, Void> asyncTask = new AsyncTask<String, Void, Void>() {
+            protected Void doInBackground(String... params) {
+                Call<ServiceResult> results = MovieMappsService.getInstance().getClassificationMovie(idMovie);
+                results.enqueue(new Callback<ServiceResult>() {
+                    @Override
+                    public void onResponse(Call<ServiceResult> call, Response<ServiceResult> response) {
+                        Log.e("Calificaciones", response.message());
+                        setClassification(response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<ServiceResult> call, Throwable t) {
+                    }
+                });
+                return null;
+            }
+        };
+        asyncTask.execute(idMovie);
     }
 }
 

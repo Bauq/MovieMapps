@@ -6,18 +6,10 @@ import com.google.gson.annotations.SerializedName;
  * Created by SA on 03/06/2016.
  */
 public class Classification {
-    int id;
     int valor;
     int idMovie;
     Long idUsuario;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getValor() {
         return valor;
